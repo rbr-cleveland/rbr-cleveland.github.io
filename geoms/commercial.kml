@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Commercial Service Area</name>
+		<Placemark>
+			<name>Current Service Area</name>
+			<styleUrl>#poly-62AF44-0-76-nodesc</styleUrl>
+			<ExtendedData>
+			</ExtendedData>
+			<Polygon>
+				<outerBoundaryIs>
+					<LinearRing>
+						<tessellate>1</tessellate>
+						<coordinates>-81.623268,41.54636,0.0 -81.746349,41.48864900000001,0.0 -81.798534,41.498292,0.0 -81.833382,41.490449,0.0 -81.833038,41.476946,0.0 -81.820335,41.475789,0.0 -81.813641,41.465627,0.0 -81.818104,41.420460999999996,0.0 -81.775017,41.420590000000004,0.0 -81.759052,41.44041,0.0 -81.704807,41.44041,0.0 -81.687813,41.446329,0.0 -81.675457,41.478506,0.0 -81.665497,41.479776,0.0 -81.660175,41.475789,0.0 -81.655708,41.450768000000004,0.0 -81.629276,41.430372,0.0 -81.581726,41.423421,0.0 -81.56541800000001,41.42458,0.0 -81.56559000000001,41.500992,0.0 -81.56867,41.583285,0.0 -81.623268,41.54636,0.0</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Style id='poly-62AF44-0-76-nodesc-normal'>
+			<LineStyle>
+				<color>ff44AF62</color>
+				<width>0</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C44AF62</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='poly-62AF44-0-76-nodesc-highlight'>
+			<LineStyle>
+				<color>ff44AF62</color>
+				<width>0.0</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C44AF62</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='poly-62AF44-0-76-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#poly-62AF44-0-76-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#poly-62AF44-0-76-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>
