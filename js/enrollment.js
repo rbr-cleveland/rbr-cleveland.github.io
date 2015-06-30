@@ -5,11 +5,11 @@
   rbrEnrollment = angular.module('rbrEnrollment', ['ui.router']);
 
 
-  rbrEnrollment.factory('account', function(){
-        return {};
+  rbrEnrollment.factory('account', function() {
+    return {type: 'residential'};
   });
 
-  rbrEnrollment.value('mapUrl', 'https://www.google.com/maps/d/kml?mid=zpUmN-ASXBHg.kXl1slH5PnU8&nl=1&lid=zpUmN-ASXBHg.kRRbaQBcOYqI&cid=mp&cv=dRW0ciSPPmc.en.');
+  rbrEnrollment.value('mapItem', {residential: 'geoms/residential.json', commercial: 'geoms/commercial.json'});
 
   rbrEnrollment.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     // // For any unmatched url, redirect to /state1
@@ -17,16 +17,16 @@
 
     // Now set up the states
     $stateProvider
-      // .state('enrollment', {
-      //   url: "/enrollment",
-      //   template: "<div ui-view></div>",
-      //   abstract: true,
-      //   contoller: function($rootScope) {
-      //     $rootScope.account = {};
-      //     $rootScope.account = $rootScope.account || {};
-      //     $state.go("enrollment.type");
-      //   }
-      // })
+    // .state('enrollment', {
+    //   url: "/enrollment",
+    //   template: "<div ui-view></div>",
+    //   abstract: true,
+    //   contoller: function($rootScope) {
+    //     $rootScope.account = {};
+    //     $rootScope.account = $rootScope.account || {};
+    //     $state.go("enrollment.type");
+    //   }
+    // })
       .state('enrollmentType', {
         url: "/type",
         templateUrl: "partials/enrollment-type.html",
@@ -39,15 +39,20 @@
         url: "/address",
         templateUrl: "partials/enrollment-address.html",
         controller: function($scope, account, rbrServiceArea) {
-            $scope.account = account;
-            $scope.account.address = $scope.account.address || {};
-            $scope.account.address.state = "OH";
+          $scope.account = account;
+          $scope.account.address = $scope.account.address || {
+            street1: "",
+            street2: "",
+            city: "",
+            state: "OH",
+            zip: ""
+          };
 
-            var isInServiceArea = false;
+          var inServiceArea = false;
 
-            $scope.isInServiceArea = function isInServiceArea(){
-              isInServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
-            }
+          $scope.isInServiceArea = function isInServiceArea() {
+            inServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
+          }
 
         }
       })
@@ -74,68 +79,92 @@
           $scope.account = account;
 
         }
-      })
-      ;
-    }]);
+      });
+  }]);
 
-  rbrEnrollment.factory('rbrServiceArea', ['mapUrl', function (mapUrl) {
-
+  rbrEnrollment.factory('rbrServiceArea', ['$http', function($http) {
     return {
 
-      detect: function(addressObj, customerType){
-        console.log(mapUrl);
+      detect: function(addressObj, customerType) {
         console.log(addressObj);
         console.log(customerType);
 
-        var chicago = new google.maps.LatLng(41.875696,-87.624207);
+        var addressWithoutLine2 = angular.copy(addressObj);
 
-        var mapOptions = {
-          zoom: 11,
-          center: chicago
-        }
+        delete addressWithoutLine2.street2;
 
-        var map = new google.maps.Map(document.getElementById('map-canvas', mapOptions));
+        var addressString = Object.keys(addressWithoutLine2).map(function(key) {
+          return addressWithoutLine2[key]
+        }).join(" ");
 
-
-
-        var layer = new google.maps.KmlLayer('http://127.0.0.1:4000/geoms/commercial.kml');
-        layer.setMap(map);
-
-        console.log(map.data.getFeatureById());
-
-        google.maps.event.addDomListener(window, "load", map);
-
-        var addressString = Object.keys(addressObj).map(function (key) {return addressObj[key]}).join(" ");
+        console.log(addressString);
 
         var geocoder = new google.maps.Geocoder();
+        var result = {}
+        var latLng = {};
+        var found = false;
+        var isInPolygon = false;
 
-        var result = [];
-
-        geocoder.geocode({'address': addressString}, function geocodeAddress(results, status){
+        geocoder.geocode({
+          'address': addressString
+        }, function geocodeAddress(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
-              if (results) {
-                  console.log(results);
-                  result['lat'] = results[0].geometry.location.A;
-                  result['lng'] = results[0].geometry.location.F;
-                  var latLng = new google.maps.LatLng(result['lat'], result['lng']);
-                  console.log(latLng);
-                  console.log('win', google.maps.geometry.poly.containsLocation(latLng, map));
-              } else {
-                  console.log('Location not found');
-              }
+            if (results) {
+              result['lat'] = results[0].geometry.location.F;
+              result['lng'] = results[0].geometry.location.A;
+              var found = true;
+              geomCalc(result);
+            } else {
+              console.log('Location not found');
+            }
           } else {
-              console.log('Geocoder failed due to: ' + status);
+            console.log('Geocoder failed due to: ' + status);
           }
         });
-        //
-        return false;
+
+        var geomCalc = function geomCalc(latLng) {
+
+          // Load a GeoJSON from the same server as our demo.
+          $http.get().then(function(res, err) {
+            if (res.status == 200){
+              console.log(latLng);
+              console.log(res.data.features[0].geometry.coordinates[0]);
+              var point = [latLng['lat'], latLng['lng']];
+              var polygon = res.data.features[0].geometry.coordinates[0];
+
+              isInPolygon = pointInPolygon(point, polygon);
+
+            } else {
+              console.log('not found!', err)
+            }
+          });
+        }
+
+        var pointInPolygon = function pointInPolygon(point, polygon){
+          // ray-casting algorithm based on
+          // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+
+          var x = point[0], y = point[1];
+
+          var inside = false;
+          for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+              var xi = polygon[i][0], yi = polygon[i][1];
+              var xj = polygon[j][0], yj = polygon[j][1];
+
+              var intersect = ((yi > y) != (yj > y))
+                  && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+              if (intersect) inside = !inside;
+          }
+
+          return inside;
+        }
       }
     }
   }]);
 
-  rbrEnrollment.service('rbrCustomerData', ['', function(){
+  // rbrEnrollment.service('rbrCustomerData', [function(){
 
-  }]);
+  // }]);
 
   return rbrEnrollment;
 

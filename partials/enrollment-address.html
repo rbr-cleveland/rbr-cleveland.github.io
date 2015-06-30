@@ -1,22 +1,25 @@
 <h1>I live at: </h1>
-<form>
-<div class="form-group">
-    <input data-ng-model="account.address.street1" data-ng-placeholder="Address 1" data-ng-required="true" data-ng-minlength="3" class="form-control"> </input>
-</div>
-<div class="form-group">
-    <input data-ng-model="account.address.street2" data-ng-placeholder="Address 2" data-ng-required="false" data-ng-minlength="3" class="form-control"> </input>
-</div>
-<div class="form-group">
-    <input data-ng-model="account.address.city" data-ng-placeholder="City" data-ng-required="true" data-ng-minlength="3" class="form-control"> </input>
-</div>
-<div class="row">
-    <div class="form-group">
-        <input data-ng-model="account.address.state" data-ng-required="true" data-ng-enabled="false" value="OH" class="form-control col-md-6"> </input>
-    </div>
-    <div class="form-group">
-        <input data-ng-model="account.address.zip" data-ng-placeholder="Zip" data-ng-required="true" data-ng-enabled="false" class="form-control col-md-6"> </input>
-    </div>
-</div>
+<form id="addressForm" class="form-vertical">
+  <div class="form-group">
+      <input data-ng-model="account.address.street1" placeholder="Address 1" data-ng-required="true" data-ng-minlength="3" class="form-control"> </input>
+  </div>
+  <div class="form-group">
+      <input data-ng-model="account.address.street2" placeholder="Address 2" data-ng-required="false" data-ng-minlength="3" class="form-control"> </input>
+  </div>
+  <div class="form-group">
+      <input data-ng-model="account.address.city" placeholder="City" data-ng-required="true" data-ng-minlength="3" class="form-control"> </input>
+  </div>
+  <div class="row">
+      <div class="form-group col-md-6">
+          <input data-ng-model="account.address.state" data-ng-required="true" disabled value="OH" class="form-control "> </input>
+      </div>
+      <div class="form-group col-md-6">
+          <input data-ng-model="account.address.zip" placeholder="Zip" data-ng-required="true" data-ng-enabled="false" class="form-control"> </input>
+      </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-large btn-primary" data-ng-mouseup="isInServiceArea()">Next</button>
+  </div>
 </form>
+<div id="map-canvas"></div>
 
-<button class="btn btn-large btn-primary" data-ng-mosueup="isInServiceArea()">Next</button>
