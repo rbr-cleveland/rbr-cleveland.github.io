@@ -1,12 +1,5 @@
 {
   "type": "FeatureCollection",
-  "crs": {
-    "type": "name",
-    "properties": {
-      "name": "RBR - Commercial Service Area",
-      "Description": "The current commercial service area of RustBeltRiders"
-    }
-  },
   "features": [
     {
       "type": "Feature",
