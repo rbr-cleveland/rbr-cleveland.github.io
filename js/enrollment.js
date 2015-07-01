@@ -6,10 +6,15 @@
 
 
   rbrEnrollment.factory('account', function() {
-    return {type: 'residential'};
+    return {
+      type: 'residential'
+    };
   });
 
-  rbrEnrollment.value('mapItem', {residential: 'geoms/residential.json', commercial: 'geoms/commercial.json'});
+  rbrEnrollment.value('mapItem', {
+    residential: 'geoms/residential.json',
+    commercial: 'geoms/commercial.json'
+  });
 
   rbrEnrollment.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     // // For any unmatched url, redirect to /state1
@@ -38,7 +43,7 @@
       .state('enrollmentAddress', {
         url: "/address",
         templateUrl: "partials/enrollment-address.html",
-        controller: function($scope, account, rbrServiceArea) {
+        controller: function($scope, account, rbrServiceArea, $state) {
           $scope.account = account;
           $scope.account.address = $scope.account.address || {
             street1: "",
@@ -52,6 +57,12 @@
 
           $scope.isInServiceArea = function isInServiceArea() {
             inServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
+            console.log(inServiceArea);
+            if (inServiceArea) {
+              $state.go('enrollmentSuccess');
+            } else {
+              $state.go('enrollmentNotify');
+            }
           }
 
         }
@@ -82,12 +93,84 @@
       });
   }]);
 
-  rbrEnrollment.factory('rbrServiceArea', ['$http', function($http) {
-    return {
+  rbrEnrollment.factory('rbrServiceArea', ['$http', '$q', function($http, $q) {
+    var self = this;
 
-      detect: function(addressObj, customerType) {
-        console.log(addressObj);
-        console.log(customerType);
+    var pointInPolygon = function pointInPolygon(point, polygon) {
+        // ray-casting algorithm based on
+        // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+
+        var x = point[0],
+          y = point[1];
+
+        var inside = false;
+        for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+          var xi = polygon[i][0],
+            yi = polygon[i][1];
+          var xj = polygon[j][0],
+            yj = polygon[j][1];
+
+          var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+          if (intersect) inside = !inside;
+        }
+
+        return inside;
+    };
+
+    var methods = {
+      geocode: function geocode(addressString) {
+        var geocoder = new google.maps.Geocoder();
+        var latLngResult = {};
+
+        geocoder.geocode({
+          'address': addressString
+        }, function geocodeAddress(results, status) {
+
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results) {
+              result['lat'] = results[0].geometry.location.F;
+              result['lng'] = results[0].geometry.location.A;
+
+              var found = true;
+              latLngResult = result;
+            } else {
+              console.log('Location not found');
+            }
+          } else {
+            console.log('Geocoder failed due to: ' + status);
+          }
+        });
+        return latLngResult;
+      },
+
+
+
+
+      geomCalc: function geomCalc(latLng) {
+
+        return $q(function(resolve, reject) {
+
+          // Load a GeoJSON from the same server as our demo.
+          $http.get('http://127.0.0.1:4000/geoms/commercial.json').then(function(res, err) {
+
+            if (res.status == 200) {
+
+
+              var point = [latLng['lat'], latLng['lng']];
+              var polygon = res.data.features[0].geometry.coordinates[0];
+              var isInPolygon = pointInPolygon(point, polygon);
+              console.log(isInPolygon);
+
+              resolve(isInPolygon);
+            } else {
+              reject(err);
+            }
+          });
+        });
+      },
+
+
+      detect: function detect(addressObj, customerType) {
 
         var addressWithoutLine2 = angular.copy(addressObj);
 
@@ -97,69 +180,25 @@
           return addressWithoutLine2[key]
         }).join(" ");
 
-        console.log(addressString);
+        var latLngResult = this.geocode(addressString);
+        var isInPolygon = this.geomCalc(latLngResult);
+        var subscriberInServiceArea = false;
 
-        var geocoder = new google.maps.Geocoder();
-        var result = {}
-        var latLng = {};
-        var found = false;
-        var isInPolygon = false;
-
-        geocoder.geocode({
-          'address': addressString
-        }, function geocodeAddress(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (results) {
-              result['lat'] = results[0].geometry.location.F;
-              result['lng'] = results[0].geometry.location.A;
-              var found = true;
-              geomCalc(result);
-            } else {
-              console.log('Location not found');
-            }
-          } else {
-            console.log('Geocoder failed due to: ' + status);
+        isInPolygon.then(function(result, err) {
+          if (result){
+            subscriberInServiceArea = result;
           }
+          else {
+            console.log('fail!');
+          }
+
         });
 
-        var geomCalc = function geomCalc(latLng) {
-
-          // Load a GeoJSON from the same server as our demo.
-          $http.get().then(function(res, err) {
-            if (res.status == 200){
-              console.log(latLng);
-              console.log(res.data.features[0].geometry.coordinates[0]);
-              var point = [latLng['lat'], latLng['lng']];
-              var polygon = res.data.features[0].geometry.coordinates[0];
-
-              isInPolygon = pointInPolygon(point, polygon);
-
-            } else {
-              console.log('not found!', err)
-            }
-          });
-        }
-
-        var pointInPolygon = function pointInPolygon(point, polygon){
-          // ray-casting algorithm based on
-          // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
-
-          var x = point[0], y = point[1];
-
-          var inside = false;
-          for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-              var xi = polygon[i][0], yi = polygon[i][1];
-              var xj = polygon[j][0], yj = polygon[j][1];
-
-              var intersect = ((yi > y) != (yj > y))
-                  && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-              if (intersect) inside = !inside;
-          }
-
-          return inside;
-        }
+        return subscriberInServiceArea;
       }
     }
+
+    return methods;
   }]);
 
   // rbrEnrollment.service('rbrCustomerData', [function(){
