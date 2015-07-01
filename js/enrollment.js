@@ -11,9 +11,9 @@
     };
   });
 
-  rbrEnrollment.value('mapItem', {
-    residential: 'geoms/residential.json',
-    commercial: 'geoms/commercial.json'
+  rbrEnrollment.value('mapItems', {
+    residential: '/geoms/residential.json',
+    commercial: '/geoms/commercial.json'
   });
 
   rbrEnrollment.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -53,18 +53,16 @@
             zip: ""
           };
 
-          var inServiceArea = false;
+          $scope.subscriberInServiceArea = false;
 
           $scope.isInServiceArea = function isInServiceArea() {
-            inServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
-            console.log(inServiceArea);
-            if (inServiceArea) {
-              $state.go('enrollmentSuccess');
-            } else {
-              $state.go('enrollmentNotify');
-            }
-          }
-
+            var detectServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
+            detectServiceArea.then(function(result){
+              console.log(result);
+              $scope.subscriberInServiceArea = result;
+              $scope.subscriberInServiceArea ? $state.go('enrollmentSuccess') : $state.go('enrollmentNotify');
+            })
+          };
         }
       })
       .state('enrollmentSuccess', {
@@ -93,108 +91,113 @@
       });
   }]);
 
-  rbrEnrollment.factory('rbrServiceArea', ['$http', '$q', function($http, $q) {
+  rbrEnrollment.factory('rbrServiceArea', ['$http', '$q', 'mapItems', function($http, $q, mapItems) {
     var self = this;
 
     var pointInPolygon = function pointInPolygon(point, polygon) {
-        // ray-casting algorithm based on
-        // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+      // ray-casting algorithm based on
+      // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
 
-        var x = point[0],
-          y = point[1];
+      var x = point[0],
+        y = point[1];
 
-        var inside = false;
-        for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
-          var xi = polygon[i][0],
-            yi = polygon[i][1];
-          var xj = polygon[j][0],
-            yj = polygon[j][1];
+      var inside = false;
+      for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        var xi = polygon[i][0],
+          yi = polygon[i][1];
+        var xj = polygon[j][0],
+          yj = polygon[j][1];
 
-          var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-          if (intersect) inside = !inside;
-        }
+        var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect) inside = !inside;
+      }
 
-        return inside;
+      return inside;
     };
 
-    var methods = {
-      geocode: function geocode(addressString) {
-        var geocoder = new google.maps.Geocoder();
-        var latLngResult = {};
+    var geomCalc = function geomCalc(latLng, customerType) {
 
-        geocoder.geocode({
-          'address': addressString
-        }, function geocodeAddress(results, status) {
+      return $q(function(resolve, reject) {
 
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (results) {
-              result['lat'] = results[0].geometry.location.F;
-              result['lng'] = results[0].geometry.location.A;
+        geomUrl = customerType == 'residential' ? mapItems.residential : mapItems.commercial;
 
-              var found = true;
-              latLngResult = result;
-            } else {
-              console.log('Location not found');
-            }
+        // Load a GeoJSON from the same server as our demo.
+        $http.get(geomUrl).then(function(res, err) {
+
+          if (res.status == 200) {
+
+
+            var point = [latLng['lat'], latLng['lng']];
+            var polygon = res.data.features[0].geometry.coordinates[0];
+            var isInPolygon = pointInPolygon(point, polygon);
+
+            console.log(point, polygon);
+            console.log(isInPolygon);
+
+             resolve(isInPolygon);
           } else {
-            console.log('Geocoder failed due to: ' + status);
+            reject(err);
           }
         });
-        return latLngResult;
-      },
+      });
+    };
 
-
-
-
-      geomCalc: function geomCalc(latLng) {
-
+    geocode =function geocode(addressString) {
+        var geocoder = new google.maps.Geocoder();
+        var result = {};
         return $q(function(resolve, reject) {
+          geocoder.geocode({
+            'address': addressString
+          }, function geocodeAddress(results, status) {
 
-          // Load a GeoJSON from the same server as our demo.
-          $http.get('http://127.0.0.1:4000/geoms/commercial.json').then(function(res, err) {
-
-            if (res.status == 200) {
-
-
-              var point = [latLng['lat'], latLng['lng']];
-              var polygon = res.data.features[0].geometry.coordinates[0];
-              var isInPolygon = pointInPolygon(point, polygon);
-              console.log(isInPolygon);
-
-              resolve(isInPolygon);
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (results) {
+                result['lat'] = results[0].geometry.location.F;
+                result['lng'] = results[0].geometry.location.A;
+                var found = true;
+                resolve(result);
+              } else {
+                console.log('Location not found');
+                reject(results);
+              }
             } else {
-              reject(err);
+              console.log('Geocoder failed due to: ' + status);
+              reject(status);
             }
           });
         });
-      },
+      };
+
+    var methods = {
 
 
       detect: function detect(addressObj, customerType) {
+        return $q(function(resolve, reject){
+          var addressWithoutLine2 = angular.copy(addressObj);
 
-        var addressWithoutLine2 = angular.copy(addressObj);
+          delete addressWithoutLine2.street2;
 
-        delete addressWithoutLine2.street2;
+          var addressString = Object.keys(addressWithoutLine2).map(function(key) {
+            return addressWithoutLine2[key]
+          }).join(" ");
 
-        var addressString = Object.keys(addressWithoutLine2).map(function(key) {
-          return addressWithoutLine2[key]
-        }).join(" ");
+          var getLatLng = geocode(addressString);
 
-        var latLngResult = this.geocode(addressString);
-        var isInPolygon = this.geomCalc(latLngResult);
-        var subscriberInServiceArea = false;
+          var subscriberInServiceArea = false;
 
-        isInPolygon.then(function(result, err) {
-          if (result){
-            subscriberInServiceArea = result;
-          }
-          else {
-            console.log('fail!');
-          }
+          var latLngResult = {};
 
+          getLatLng.then(function(result) {
+            if (result) {
+              var isInPolygon = geomCalc(result, customerType);
+
+              isInPolygon.then(function(result) {
+                  console.log(result);
+                  resolve(result);
+              });
+            }
+          });
         });
-
-        return subscriberInServiceArea;
       }
     }
 
