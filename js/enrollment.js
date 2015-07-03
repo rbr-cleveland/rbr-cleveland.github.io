@@ -18,7 +18,7 @@
 
   rbrEnrollment.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     // // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise("/type");
+    $urlRouterProvider.otherwise("/");
 
     // Now set up the states
     $stateProvider
@@ -33,7 +33,7 @@
     //   }
     // })
       .state('enrollmentType', {
-        url: "/type",
+        url: "/",
         templateUrl: "partials/enrollment-type.html",
         controller: function($scope, account) {
           $scope.account = account;

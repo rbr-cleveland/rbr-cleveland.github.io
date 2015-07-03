@@ -26,6 +26,7 @@ $content-width:    800px;
 
 $on-palm:          600px;
 $on-laptop:        800px;
+$light-green: #dfefdc;
 
 
 
@@ -47,6 +48,7 @@ $on-laptop:        800px;
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "base",
+        "variables",
         "theme",
         "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap"
 ;
@@ -56,6 +58,9 @@ $on-laptop:        800px;
   img {
     height:30px;
   }
+}
+.navbar-default {
+  background-color: $light-green;
 }
 
 // .modal-dialog {
@@ -68,3 +73,5 @@ $on-laptop:        800px;
 //   height: 100%;
 //   border-radius: 0;
 // }
+
+@import 'navigation'

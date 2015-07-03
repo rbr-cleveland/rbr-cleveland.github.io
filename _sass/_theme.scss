@@ -999,21 +999,16 @@ footer {
 }
 
 #home-center {
+    width: 100%;
     height: 100%;
     display: table;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 90%;
-    margin-top: 10%;
-    margin-left: 15%;
-    margin-right: 15%;
+    position: relative;
+    min-height:500px;
+    top:0;
     /*position:relative!important;*/
 
     background: url("http://rustbeltriderscomposting.com/wp-content/themes/newave-theme/images/Rust-Belt-Riders-Logo.png");
-    /*background-size: 100%;*/
-
+    background-position: center;
     background-repeat: no-repeat;
 }
 /*.div-align-center {
