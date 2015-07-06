@@ -7,7 +7,10 @@
 
   rbrEnrollment.factory('account', function() {
     return {
-      type: 'residential'
+      type: 'residential',
+      eligible: false,
+      inServiceArea: false,
+      status: false
     };
   });
 
@@ -15,6 +18,22 @@
     residential: '/geoms/residential.json',
     commercial: '/geoms/commercial.json'
   });
+
+  rbrEnrollment.value('enrollmentEnabled', {
+    residential: false,
+    commercial: true
+  });
+
+  rbrEnrollment.value('messageStrings', {
+    addressHeaderResidential: "I Live at:",
+    addressHeaderCommercial: "My business is at:",
+    thankYou: "Thank you for your interest in our services!",
+    noNewResidentialCustomers: "Unfortuantely, due to high demand we are no longer accepting new residential customers.",
+    notInOurServiceRegionCommericial: "Unfortunately, your business is not in our service area.",
+    notInOurServiceRegionResidential: "Unfortunetly, your home is not currently in our service area.",
+    signUpBelow: "Please sign up below and we will notify you once we can provide our service to you!",
+
+  })
 
   rbrEnrollment.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     // // For any unmatched url, redirect to /state1
@@ -35,15 +54,19 @@
       .state('enrollmentType', {
         url: "/",
         templateUrl: "partials/enrollment-type.html",
-        controller: function($scope, account) {
+        controller: function($scope, account, enrollmentEnabled, $state) {
           $scope.account = account;
-          $scope.account.type = 'residential';
+          $scope.account.type = account.type = 'residential';
+
+          $scope.typeSubmit = function() {
+            enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', { reason: "enrollment-disabled"});
+          }
         }
       })
       .state('enrollmentAddress', {
         url: "/address",
         templateUrl: "partials/enrollment-address.html",
-        controller: function($scope, account, rbrServiceArea, $state) {
+        controller: function($scope, account, rbrServiceArea, $state, messageStrings) {
           $scope.account = account;
           $scope.account.address = $scope.account.address || {
             street1: "",
@@ -53,14 +76,22 @@
             zip: ""
           };
 
+          $scope.addressHeader = account.type == 'residential' ? messageStrings.addressHeaderResidential : messageStrings.addressHeaderCommercial;
+
           $scope.subscriberInServiceArea = false;
 
           $scope.isInServiceArea = function isInServiceArea() {
             var detectServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
-            detectServiceArea.then(function(result){
-              console.log(result);
-              $scope.subscriberInServiceArea = result;
-              $scope.subscriberInServiceArea ? $state.go('enrollmentSuccess') : $state.go('enrollmentNotify');
+            detectServiceArea.then(function(result) {
+              $scope.account.inServiceArea = result;
+              // Now
+              if($scope.account.inServiceArea) {
+                $scope.account.eligible = true;
+                $state.go('enrollmentSuccess')
+              }
+              else{
+                $state.go('enrollmentNotify', { reason: "not-in-service-area"});
+              }
             })
           };
         }
@@ -74,10 +105,32 @@
         }
       })
       .state('enrollmentNotify', {
-        url: "/notify",
+        url: "/notify/:reason",
         templateUrl: "partials/enrollment-notify.html",
-        controller: function($scope, account) {
+        controller: function($scope, account, messageStrings, enrollmentEnabled, $stateParams) {
           $scope.account = account;
+          $scope.messages = [messageStrings.thankYou];
+          console.log($stateParams);
+
+          switch ($stateParams.reason) {
+
+            case "enrollment-disabled":
+              $scope.messages.push(messageStrings.noNewResidentialCustomers);
+              break;
+
+            case "not-in-service-area":
+              if (account.type == 'commercial') {
+                $scope.messages.push(messageStrings.notInOurServiceRegionCommericial);
+              } else {
+                $scope.messages.push(messageStrings.notInOurServiceRegionResidential);
+              }
+              break;
+          }
+
+          $scope.messages.push(messageStrings.signUpBelow);
+
+          // This screen means that the user is not eligible to become a subcriber
+          // So we have to figure out why and send them the message.
 
         }
       })
@@ -92,7 +145,6 @@
   }]);
 
   rbrEnrollment.factory('rbrServiceArea', ['$http', '$q', 'mapItems', function($http, $q, mapItems) {
-    var self = this;
 
     var pointInPolygon = function pointInPolygon(point, polygon) {
       // ray-casting algorithm based on
@@ -126,7 +178,6 @@
 
           if (res.status == 200) {
 
-
             var point = [latLng['lat'], latLng['lng']];
             var polygon = res.data.features[0].geometry.coordinates[0];
             var isInPolygon = pointInPolygon(point, polygon);
@@ -134,7 +185,7 @@
             console.log(point, polygon);
             console.log(isInPolygon);
 
-             resolve(isInPolygon);
+            resolve(isInPolygon);
           } else {
             reject(err);
           }
@@ -142,37 +193,36 @@
       });
     };
 
-    geocode =function geocode(addressString) {
-        var geocoder = new google.maps.Geocoder();
-        var result = {};
-        return $q(function(resolve, reject) {
-          geocoder.geocode({
-            'address': addressString
-          }, function geocodeAddress(results, status) {
+    var geocode = function geocode(addressString) {
+      var geocoder = new google.maps.Geocoder();
+      var result = {};
+      return $q(function(resolve, reject) {
+        geocoder.geocode({
+          'address': addressString
+        }, function geocodeAddress(results, status) {
 
-            if (status == google.maps.GeocoderStatus.OK) {
-              if (results) {
-                result['lat'] = results[0].geometry.location.F;
-                result['lng'] = results[0].geometry.location.A;
-                var found = true;
-                resolve(result);
-              } else {
-                console.log('Location not found');
-                reject(results);
-              }
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results) {
+              result['lat'] = results[0].geometry.location.F;
+              result['lng'] = results[0].geometry.location.A;
+              var found = true;
+              resolve(result);
             } else {
-              console.log('Geocoder failed due to: ' + status);
-              reject(status);
+              console.log('Location not found');
+              reject(results);
             }
-          });
+          } else {
+            console.log('Geocoder failed due to: ' + status);
+            reject(status);
+          }
         });
-      };
+      });
+    };
 
     var methods = {
 
-
       detect: function detect(addressObj, customerType) {
-        return $q(function(resolve, reject){
+        return $q(function(resolve, reject) {
           var addressWithoutLine2 = angular.copy(addressObj);
 
           delete addressWithoutLine2.street2;
@@ -192,8 +242,8 @@
               var isInPolygon = geomCalc(result, customerType);
 
               isInPolygon.then(function(result) {
-                  console.log(result);
-                  resolve(result);
+                console.log(result);
+                resolve(result);
               });
             }
           });
@@ -204,9 +254,9 @@
     return methods;
   }]);
 
-  // rbrEnrollment.service('rbrCustomerData', [function(){
+  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', function($http, $q) {
 
-  // }]);
+  }]);
 
   return rbrEnrollment;
 

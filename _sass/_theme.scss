@@ -1608,8 +1608,8 @@ ul.technology {
 ul.technology li {
     display: inline-block;
     text-align: left;
-    font-family: "Apercu", sans serif;
-    background-image: url('http://rustbeltriderscomposting.com/wp-content/themes/newave-theme/images/Rust-Belt-Riders-Logo.png');
+    font-family: $font-family;
+    //background-image: url('http://rustbeltriderscomposting.com/wp-content/themes/newave-theme/images/Rust-Belt-Riders-Logo.png');
     width: 238px;
     margin: 10px;
     padding: 30px 20px;
@@ -2393,7 +2393,7 @@ div.mc-image {
     background: none;
     border-radius: 3px 3px 3px 3px;
     color: rgba(255, 255, 255, 0.5);
-    font-family: 'Open Sans', serif;
+    font-family: $font-family;
     font-size: 14px;
     padding: 45px 0 25px 0;
     text-align: center;
@@ -2403,7 +2403,7 @@ div.mc-image {
 .project-counters .counters li .count {
     border-radius: 3px 3px 3px 3px;
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-family;
     font-size: 70px;
     padding: 25px 0;
     text-align: center;
@@ -2495,7 +2495,7 @@ div.mc-image {
     text-align: center;
     font-size: 72px;
     line-height: 72px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-family;
     padding: 10px 20px;
     border-radius: 3px;
     margin-bottom: 30px;
@@ -2530,9 +2530,8 @@ textarea,
 input[type="text"],
 input[type="email"] {
     color: #999999;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-family;
     font-size: 14px;
-    text-transform: uppercase;
     height: 20px;
     padding-left: 3%;
     padding-right: 3%;
@@ -2568,7 +2567,7 @@ input[type=email]:focus,
 #contact-formular input[type="submit"],
 input[type="submit"] {
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-family;
     font-size: 14px;
     text-transform: uppercase;
     padding: 10px 15px;
@@ -2917,7 +2916,7 @@ blockquote {
     background-size: 21px 17px;
     background-position: left 8px;
     background-repeat: no-repeat;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family:$font-family;
     font-size: 22px;
     font-style: italic;
     line-height: 30px;
@@ -2956,7 +2955,7 @@ blockquote {
 
 .comment-date {
     color: #ABABAB;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: $font-family;
     font-style: italic;
     margin-bottom: 10px;
 }
@@ -2993,9 +2992,8 @@ blockquote {
 #commentsform input[type="text"],
 textarea {
     color: #999999;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-family;
     font-size: 14px;
-    text-transform: uppercase;
     height: 20px;
     padding-left: 5%;
     padding-right: 5%;
@@ -3050,9 +3048,8 @@ input#search {
     background: url("images/zoom-search.png") no-repeat 10px 10px #f5f5f5;
     background-size: 30px 30px;
     color: #999999;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $font-family;
     font-size: 14px;
-    text-transform: uppercase;
     height: 20px;
     padding: 15px;
     padding-left: 45px;
