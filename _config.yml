@@ -14,6 +14,17 @@ github_username:  jekyll
 markdown: kramdown
 prose:
   media: images
+  ignore:
+    - .gitignore
+    - _config.yml
+    - /_layouts
+    - /_sass
+    - /_geoms
+    - "/js"
+    - _includes
+    - /bower_components
+    - /css
+    - /partials
   metadata:
     _posts/faq:
       - name: "category"
