@@ -49,8 +49,8 @@ prose:
           label: "FAQ Section"
           options:
             - name: General
-              option: general
+              value: general
             - name: Why Compost?
-              option: compost
+              value: compost
             - name: Why a Cooperative?
-              option: coop
+              value: coop
