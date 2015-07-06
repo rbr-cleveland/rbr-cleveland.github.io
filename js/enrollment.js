@@ -2,8 +2,28 @@
 
   var rbrEnrollment;
 
-  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'rbrEnrollmentConfig']);
+  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router']);
 
+  rbrEnrollment.value('mapItems', {
+    residential: '/geoms/residential.json',
+    commercial: '/geoms/commercial.json'
+  });
+
+  rbrEnrollment.value('enrollmentEnabled', {
+    residential: false,
+    commercial: true
+  });
+
+  rbrEnrollment.value('messageStrings', {
+    addressHeaderResidential: "I Live at:",
+    addressHeaderCommercial: "My business is at:",
+    thankYou: "Thank you for your interest in our services!",
+    noNewResidentialCustomers: "Unfortuantely, due to high demand we are no longer accepting new residential customers.",
+    notInOurServiceRegionCommericial: "Unfortunately, your business is not in our service area.",
+    notInOurServiceRegionResidential: "Unfortunetly, your home is not currently in our service area.",
+    signUpBelow: "Please sign up below and we will notify you once we can provide our service to you!",
+
+  });
 
   rbrEnrollment.factory('account', function() {
     return {
@@ -20,16 +40,7 @@
 
     // Now set up the states
     $stateProvider
-    // .state('enrollment', {
-    //   url: "/enrollment",
-    //   template: "<div ui-view></div>",
-    //   abstract: true,
-    //   contoller: function($rootScope) {
-    //     $rootScope.account = {};
-    //     $rootScope.account = $rootScope.account || {};
-    //     $state.go("enrollment.type");
-    //   }
-    // })
+
       .state('enrollmentType', {
         url: "/",
         templateUrl: "partials/enrollment-type.html",
@@ -38,7 +49,9 @@
           $scope.account.type = account.type = 'residential';
 
           $scope.typeSubmit = function() {
-            enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', { reason: "enrollment-disabled"});
+            enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', {
+              reason: "enrollment-disabled"
+            });
           }
         }
       })
@@ -64,12 +77,13 @@
             detectServiceArea.then(function(result) {
               $scope.account.inServiceArea = result;
               // Now
-              if($scope.account.inServiceArea) {
+              if ($scope.account.inServiceArea) {
                 $scope.account.eligible = true;
                 $state.go('enrollmentSuccess')
-              }
-              else{
-                $state.go('enrollmentNotify', { reason: "not-in-service-area"});
+              } else {
+                $state.go('enrollmentNotify', {
+                  reason: "not-in-service-area"
+                });
               }
             })
           };

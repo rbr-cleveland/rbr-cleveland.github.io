@@ -1,5 +1,5 @@
 ---
-layout: ""
+layout: "faq"
 category: faq
 title: "What Can't I Compost?"
 faqtype: general

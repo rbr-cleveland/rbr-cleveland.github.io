@@ -38,7 +38,7 @@ prose:
       - name: "layout"
         field:
           element: "hidden"
-          value: ""
+          value: "faq"
       - name: "title"
         field:
           element: "text"
