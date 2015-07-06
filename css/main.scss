@@ -47,10 +47,11 @@ $light-green: #dfefdc;
 
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
+        "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap",
         "base",
         "variables",
-        "theme",
-        "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap"
+        "theme"
+
 ;
 
 .navbar-brand {

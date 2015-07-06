@@ -62,13 +62,15 @@ $5/month</a></p>
             <!--/Section Title -->
             <ul class="technology row">
               {% for faq in site.categories.faq %}
+                {% if faq.faqtype == 'general' %}
                 <div class="col-md-4 text-align-left">
                     <li class="element_fade_in" style="opacity: 1; right: 0px;">
                         <h5>{{faq.title}}</h5>
                         <p>{{faq.content}}</p>
                     </li>
                 </div>
-                {% endfor %}
+                {% endif %}
+              {% endfor %}
             </ul>
         </div>
         <!-- Container -->
@@ -86,64 +88,18 @@ $5/month</a></p>
                 </p>
             </div>
             <!--/Section Title -->
-            <p>&nbsp;</p>
             <ul class="technology row">
+            {% for faq in site.categories.faq %}
+                {% if faq.faqtype == 'compost' %}
                 <div class="col-md-4 text-align-left">
                     <li class="element_fade_in" style="opacity: 1; right: 0px;">
                         <h5>Composting reduces the amount of waste you send to the landfill.</h5>
                         <p>An&nbsp;Environmental Protection Agency report from 2007 estimates that Americans could keep 140 pounds of waste per person per year out of the landfill by composting.&nbsp;&nbsp;</p>
                     </li>
                 </div>
-                <div class="col-md-4 text-align-left">
-                    <li class="element_fade_in" style="opacity: 1; right: 0px;">
-                        <h5>Composing turns your waste into a useful product—and it does so without requiring additional resources.</h5>
-                        <p>Compare this to recycling, where energy must be used to transport waste to the munipal recycling facility, sort the waste, transport it to the manufacturers, produce new products with it, and then send the finished products back in the other direction—to stores and, ultimately, homes and businesses.</p>
-                        <p></p>
-                    </li>
-                </div>
-                <div class="col-md-4 text-align-left">
-                <li class="element_fade_in" style="opacity: 1; right: 0px;">
-                    <h5>Using compost in your garden reduces the need for water and fertilizers and helps eliminate the need for pesticides.</h5>
-                    <p>The reasons, in a nutshell, are that compost improves the soil’s moisture management, regulates the soil’s pH, provides nutrients on a slow-release basis and suppresses certain plant diseases. In addition, it can bind and degrade some pollutants in the plant’s growing environment and help control erosion.</p>
-                </li>
-                </div>
-                <div class="col-md-4 text-align-left">
-                    <p></p>
-                    <p class="p1"></p>
-                    <li class="element_fade_in" style="opacity: 1; right: 0px;"><i class="fa fa-magic"></i>
-                        <h5>Composting provides you with a valuable experimental lesson</h5>
-                        <p>in the cycles of nature and the folly of our throwaway culture that is likely to lead to other waste-saving measures as time goes by. It’s also a great way to teach environmental stewardship to kids if you get them involved.</p>
-                    </li>
-                    <p></p>
-                    <p class="p1"></p>
-                </div>
-                <p></p>
-                <p class="p1"></p>
-                <div class="one_third text-align-left">
-                    <p></p>
-                    <p class="p3"></p>
-                    <li class="element_fade_in" style="opacity: 1; right: 0px;"><i class="fa fa-magic"></i>
-                        <h5>How will Rust Belt Riders Composting pick up my compost?</h5>
-                        <p>Using custom built trailers we will pick up your five-gallon bucket on bikes at an agreed upon location on your property (front porch, back door, driveway, lobby, etc) and empty your bucket into our trailer. Your bucket will be returned to the agreed upon location empty and ready to be filled up with more food scraps!</p>
-                    </li>
-                    <p></p>
-                    <p class="p3"></p>
-                </div>
-                <p></p>
-                <p class="p3"></p>
-                <li class="element_fade_in" style="opacity: 1; right: 0px;"><i class="fa fa-magic"></i>
-                    <h5>Will Rust Belt Riders Composting provide waste-removal services for events, farmers, markets, or businesses?</h5>
-                    <p>Yes! We can provide our services to you to host an eco-friendly and zero-food waste event. Ample notice will be required and rates are subject to negotiation based on volume of waste and frequency of service.</p>
-                </li>
-                <p></p>
-                <p class="p3"></p>
-                <div class="one_third text-align-left"></div>
-                <p></p>
-                <p class="p3">
-                </p>
-                <p></p>
+            {% endif %}
+            {% endfor %}
             </ul>
-            <p>&nbsp;</p>
         </div>
         <!-- Container -->
     </section>
@@ -168,34 +124,18 @@ $5/month</a></p>
                 <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
                   <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Collapsible Group Item #1
+                    {{faq.title}}
                   </a>
                 </h4>
               </div>
               <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                  {{faq.content}}
                 </div>
               </div>
             </div>
             {% endif %}
-            {% endfor %}
-                <dt><span class="accordion-status"></span><span>1. Voluntary and Open Membership</span></dt>
-                <dd class="accordion-content">Cooperatives are voluntary organizations, open to all able to use its services and willing to accept the responsibilities of membership, with out gender, social, racial, political or religious discrimination.</dd>
-                </div>
-                <dt><span class="accordion-status"></span><span>2. Democratic Member Control</span></dt>
-                <dd class="accordion-content">Cooperatives are democratic organizations controlled by their members—those who buy the goods or use the services of the cooperative—who actively participate in setting policies and making decisions.</dd>
-                <dt><span class="accordion-status"></span><span>3. Members' Ecomonic Participation</span></dt>
-                <dd class="accordion-content">Members contribute equally to, and democratically control, the capital of the cooperative. The benefits members in proportion to the business they conduct with the cooperative rather than on the capital invested.</dd>
-                <dt><span class="accordion-status"></span><span>4. Autonomy and Independence</span></dt>
-                <dd class="accordion-content">Cooperatives are autonomous, self-help organizations controlled by their members. If the co-op enters into agreements with other organizations or raises capital from external sources, it is done so based on terms that ensure democratic control by the members and maintains the cooperative’s autonomy.</dd>
-                <dt><span class="accordion-status"></span><span>5. Education, Training and Information</span></dt>
-                <dd class="accordion-content">Cooperatives provide education and training for members, elected representatives, managers and employees so they can contribute effectively to the development of their cooperative. Members also inform the general public about the nature and benefits of cooperatives.</dd>
-                <dt><span class="accordion-status"></span><span>6. Cooperation among Cooperatives</span></dt>
-                <dd class="accordion-content">Cooperatives serve their members most effectively and strengthen the cooperative movement by working together through local, national, regional and international structures.</dd>
-                <dt><span class="accordion-status"></span><span>7. Concern for Community</span></dt>
-                <dd class="accordion-content">While focusing on member needs, cooperatives work for the sustain able development of communities through policies and programs accepted by the members.</dd>
-
+          {% endfor %}
             </div>
         </div>
         <!-- Container -->
