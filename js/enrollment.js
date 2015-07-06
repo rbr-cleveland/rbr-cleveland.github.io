@@ -175,9 +175,6 @@
             var polygon = res.data.features[0].geometry.coordinates[0];
             var isInPolygon = pointInPolygon(point, polygon);
 
-            console.log(point, polygon);
-            console.log(isInPolygon);
-
             resolve(isInPolygon);
           } else {
             reject(err);
