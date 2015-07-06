@@ -19,12 +19,16 @@ prose:
     - _config.yml
     - /_layouts
     - /_sass
-    - /_geoms
-    - "/js"
+    - /geoms
+    - /js
     - _includes
     - /bower_components
     - /css
     - /partials
+    - bower.json
+    - feed.xml
+    - index.html
+    - Readme.md
   metadata:
     _posts/faq:
       - name: "category"
