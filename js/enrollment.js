@@ -2,7 +2,7 @@
 
   var rbrEnrollment;
 
-  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router']);
+  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'rbrEnrollmentConfig']);
 
 
   rbrEnrollment.factory('account', function() {
@@ -13,27 +13,6 @@
       status: false
     };
   });
-
-  rbrEnrollment.value('mapItems', {
-    residential: '/geoms/residential.json',
-    commercial: '/geoms/commercial.json'
-  });
-
-  rbrEnrollment.value('enrollmentEnabled', {
-    residential: false,
-    commercial: true
-  });
-
-  rbrEnrollment.value('messageStrings', {
-    addressHeaderResidential: "I Live at:",
-    addressHeaderCommercial: "My business is at:",
-    thankYou: "Thank you for your interest in our services!",
-    noNewResidentialCustomers: "Unfortuantely, due to high demand we are no longer accepting new residential customers.",
-    notInOurServiceRegionCommericial: "Unfortunately, your business is not in our service area.",
-    notInOurServiceRegionResidential: "Unfortunetly, your home is not currently in our service area.",
-    signUpBelow: "Please sign up below and we will notify you once we can provide our service to you!",
-
-  })
 
   rbrEnrollment.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     // // For any unmatched url, redirect to /state1
