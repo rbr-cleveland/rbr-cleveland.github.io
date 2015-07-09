@@ -18,7 +18,10 @@ messages:
     text: "looking to reduce my environmental impact"
 
   - key: typeSelectionResidentialOpt
-    text:
+    text: "Household"
+
+  - key: typeSelectionCommercialOpt
+    text: "Business"
 
   - key: addressHeaderResidential
     text: "I Live at:"

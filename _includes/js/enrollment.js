@@ -41,9 +41,11 @@
       .state('enrollmentType', {
         url: "/",
         templateUrl: "/partials/enrollment-type.html",
-        controller: function($scope, account, enrollmentEnabled, $state) {
+        controller: function($scope, account, enrollmentEnabled, $state, messageStrings) {
           $scope.account = account;
           $scope.account.type = account.type = 'residential';
+
+          $scope.messageStrings = messageStrings;
 
           $scope.typeSubmit = function() {
             enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', {
