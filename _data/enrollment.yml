@@ -1,0 +1,42 @@
+# What it looks like. Use this to allow service for either type when you are ready
+residentialEnabled: false
+commercialEnabled: true
+
+# Tips:
+#
+# key: DO NOT CHANGE. This is used on the code.
+# text: Always open and close with double quotes. If you must use quotes inside,
+# use sinqle quotes.
+#
+# Critical: Always make sure both are provided or the app will break
+# Also Critical: Keep indentation consistent with what is already here.
+messages:
+  - key: typeSelectionPre
+    text: "I am a"
+
+  - key: typeSelectionPost
+    text: "looking to reduce my environmental impact"
+
+  - key: typeSelectionResidentialOpt
+    text:
+
+  - key: addressHeaderResidential
+    text: "I Live at:"
+
+  - key: addressHeaderCommercial
+    text: "My business is at:"
+
+  - key: thankYou
+    text: "Thank you for your interest in our services!"
+
+  - key: noNewResidentialCustomers
+    text: "Unfortuantely, due to high demand we are no longer accepting new residential customers."
+
+  - key: notInOurServiceRegionCommericial
+    text: "Unfortunately, your business is not in our service area."
+
+  - key: notInOurServiceRegionResidential
+    text: "Unfortunately, your home is not currently in our service area."
+
+  - key: signUpBelow
+    text: "Please sign up below and we will notify you once we can provide our service to you!"
