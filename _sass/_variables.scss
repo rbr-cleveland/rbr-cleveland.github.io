@@ -2,3 +2,6 @@ $light-green: #dfefdc;
 $base-font-family: Lato, "Helvetica Neue", Helvetica, sans-serif;
 $alt-font-family: $base-font-family;
 $font-size-base:   16px !default;
+$grey-color: #828282;
+$grey-color-dark: darken($grey-color, 25%);
+$brand-primary: darken($grey-color-dark, 6.5%) !default; // #337ab7
