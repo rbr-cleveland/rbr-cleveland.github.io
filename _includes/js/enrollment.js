@@ -4,6 +4,7 @@
 
   rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out']);
 
+  rbrEnrollment.value('serverUrl', {{site.config.serverurl}})
   rbrEnrollment.value('mapItems', {
     residential: '/geoms/residential.json',
     commercial: '/geoms/commercial.json'
@@ -249,7 +250,7 @@
   rbrEnrollment.service('rbrCustomerData', ['$http', '$q', function($http, $q) {
     return {
       submit: function(account){
-        $http.post('http://localhost:8081/api/new-account', account)
+        $http.post('', account)
 
         .success(function(data, status, headers, config){
           console.log('whoo');

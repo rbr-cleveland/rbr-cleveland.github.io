@@ -10,6 +10,7 @@ url: "https://rbr-cleveland.github.io" # the base hostname & protocol for your s
 twitter_username: jekyllrb
 github_username:  jekyll
 permalink: pretty
+serverurl: https://rbr-backend.herokuapp.com
 # Build settings
 markdown: kramdown
 prose:
