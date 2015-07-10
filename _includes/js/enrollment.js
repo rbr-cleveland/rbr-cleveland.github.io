@@ -126,6 +126,7 @@
               break;
           }
           $scope.signUpForUpdates = function(){
+            $scope.isWaiting = true;
             rbrCustomerData.submit($scope.account);
           }
 
@@ -253,13 +254,14 @@
     return methods;
   }]);
 
-  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl', function($http, $q, serverUrl) {
+  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl', '$scope', function($http, $q, serverUrl, $scope) {
     return {
       submit: function(account){
         $http.post(serverUrl, account)
 
         .success(function(data, status, headers, config){
           console.log('whoo');
+          $scope.isWaiting = false;
         })
         .error(function(data, status, headers, config){
           console.log(data);
