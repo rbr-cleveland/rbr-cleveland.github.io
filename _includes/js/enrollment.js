@@ -4,7 +4,8 @@
 
   rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out']);
 
-  rbrEnrollment.value('serverUrl', {{site.config.serverurl}})
+  rbrEnrollment.value('serverUrl', "{{site.config.serverurl}}");
+
   rbrEnrollment.value('mapItems', {
     residential: '/geoms/residential.json',
     commercial: '/geoms/commercial.json'
@@ -247,10 +248,10 @@
     return methods;
   }]);
 
-  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', function($http, $q) {
+  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl' function($http, $q, serverUrl) {
     return {
       submit: function(account){
-        $http.post('', account)
+        $http.post(serverUrl, account)
 
         .success(function(data, status, headers, config){
           console.log('whoo');
