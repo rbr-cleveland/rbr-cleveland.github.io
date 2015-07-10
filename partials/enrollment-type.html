@@ -1,17 +1,19 @@
 <div class="anim-slide-left">
+<form  id="typeForm" name="typeForm" data-ng-submit="typeSubmit(typeForm.$valid)">
   <div class="form-group">
     <span class="lead">
-    <form class="form-inline">
+
     I am a
-      <select class="form-control" data-ng-model="account.type">
+      <select data-ng-model="account.type">
         <option value="residential">Household</option>
         <option value="commercial">Business</option>
       </select>
       looking to reduce my enviornmental impact
-      </form>
+
   </span>
   </div>
-  <div class="form-group">
-    <button class="btn btn-lg btn-primary" data-ng-mouseup="typeSubmit()">Next <span class="fa fa-arrow-right"></span></button>
+  <div class="form-group well well-sm text-align-right">
+    <input  type="submit" class="btn btn-lg btn-primary fa-input" value="Next &#xf178;">
   </div>
+  </form>
 </div>

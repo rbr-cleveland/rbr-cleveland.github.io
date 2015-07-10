@@ -1,6 +1,6 @@
 <div class="wrapper anim-slide-left">
 <h1>{{addressHeader}} </h1>
-<form id="addressForm" class="form-vertical">
+<form id="addressForm" class="form-vertical" name="addressForm" data-ng-submit="isInServiceArea(addressForm.$valid)">
   <div class="form-group">
       <input data-ng-model="account.address.street1" placeholder="Address 1" data-ng-required="true" data-ng-minlength="3" class="form-control"> </input>
   </div>
@@ -18,8 +18,8 @@
           <input data-ng-model="account.address.zip" placeholder="Zip" data-ng-required="true" data-ng-enabled="false" class="form-control"> </input>
       </div>
   </div>
-  <div class="form-group">
-    <button class="btn btn-lg btn-primary" data-ng-mouseup="isInServiceArea()">Next</button>
+  <div class="form-group well well-sm text-align-right">
+    <button ng-disabled="!addressForm.$valid" class="btn btn-lg btn-primary" type="submit">Next&nbsp;&nbsp;<span class="fa fa-arrow-right"></span></button>
   </div>
 </form>
 </div>

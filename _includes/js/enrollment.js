@@ -49,10 +49,10 @@
 
           $scope.messageStrings = messageStrings;
 
-          $scope.typeSubmit = function() {
-            enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', {
-              reason: "enrollment-disabled"
-            });
+          $scope.typeSubmit = function(isValid) {
+            if (isValid){
+              enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', { reason: "enrollment-disabled" });
+            }
           }
         }
       })
@@ -73,20 +73,22 @@
 
           $scope.subscriberInServiceArea = false;
 
-          $scope.isInServiceArea = function isInServiceArea() {
-            var detectServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
-            detectServiceArea.then(function(result) {
-              $scope.account.inServiceArea = result;
-              // Now
-              if ($scope.account.inServiceArea) {
-                $scope.account.eligible = true;
-                $state.go('enrollmentSuccess')
-              } else {
-                $state.go('enrollmentNotify', {
-                  reason: "not-in-service-area"
-                });
-              }
-            })
+          $scope.isInServiceArea = function isInServiceArea(isValid) {
+            if (isValid){
+              var detectServiceArea = rbrServiceArea.detect($scope.account.address, $scope.account.type);
+              detectServiceArea.then(function(result) {
+                $scope.account.inServiceArea = result;
+                // Now
+                if ($scope.account.inServiceArea) {
+                  $scope.account.eligible = true;
+                  $state.go('enrollmentSuccess')
+                } else {
+                  $state.go('enrollmentNotify', {
+                    reason: "not-in-service-area"
+                  });
+                }
+              })
+            }
           };
         }
       })
