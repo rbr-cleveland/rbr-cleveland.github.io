@@ -16,7 +16,7 @@
           <input data-ng-model="account.address.state" data-ng-required="true" disabled value="OH" class="form-control "> </input>
       </div>
       <div class="form-group col-md-6">
-          <input data-ng-model="account.address.zip" placeholder="Zip" data-ng-required="true" data-ng-enabled="false" class="form-control"> </input>
+          <input data-ng-model="account.address.zip" placeholder="Zip" data-ng-minlength="5" data-ng-maxlength="3" data-ng-required="true" data-ng-enabled="false" class="form-control"> </input>
       </div>
   </div>
   </div>
