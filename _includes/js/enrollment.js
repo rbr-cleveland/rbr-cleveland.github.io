@@ -33,7 +33,7 @@
     // // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise("/");
 
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
 
     // Now set up the states
     $stateProvider
@@ -91,9 +91,12 @@
       .state('enrollmentSuccess', {
         url: "/success",
         templateUrl: "/partials/enrollment-success.html",
-        controller: function($scope, account) {
+        controller: function($scope, account, rbrCustomerData) {
           $scope.account = account;
 
+          $scope.submitAccount = function(){
+            rbrCustomerData.submit($scope.account);
+          }
         }
       })
       .state('enrollmentNotify', {
@@ -226,7 +229,7 @@
 
           var latLngResult = {};
 
-          getLatLng.then(function(result) {
+          getLatLng.then(function(result)   {
             if (result) {
               var isInPolygon = geomCalc(result, customerType);
 
@@ -244,6 +247,18 @@
   }]);
 
   rbrEnrollment.service('rbrCustomerData', ['$http', '$q', function($http, $q) {
+    return {
+      submit: function(account){
+        $http.post('http://localhost:8081/api/new-account', account)
+
+        .success(function(data, status, headers, config){
+          console.log('whoo');
+        })
+        .error(function(data, status, headers, config){
+          console.log(data);
+        })
+      }
+    }
 
   }]);
 

@@ -68,10 +68,10 @@ select {
 html,
 body {
     font-family: $font-family;
-    font-size: 12px;
+    font-size: 14px;
     height: 100%;
     width: 100%;
-    color: #999999;
+    color: #444;
     background: #f5f5f5;
 }
 
@@ -2519,68 +2519,68 @@ h5.company-address {
 }
 /* Contact Formular */
 
-#contact-formular {
-    text-align: center!important;
-}
+// #contact-formular {
+//     text-align: center!important;
+// }
 
-#contact-formular input[type="text"],
-#contact-formular input[type="email"],
-input[type="password"],
-textarea,
-input[type="text"],
-input[type="email"] {
-    color: #999999;
-    font-family: $font-family;
-    font-size: 14px;
-    height: 20px;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    width: 94%;
-    background: #f5f5f5;
-    border-radius: 3px;
-    margin-bottom: 20px;
-    border: 0;
-    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -o-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-}
+// #contact-formular input[type="text"],
+// #contact-formular input[type="email"],
+// input[type="password"],
+// textarea,
+// input[type="text"],
+// input[type="email"] {
+//     color: #999999;
+//     font-family: $font-family;
+//     font-size: 14px;
+//     height: 20px;
+//     padding-left: 3%;
+//     padding-right: 3%;
+//     padding-top: 15px;
+//     padding-bottom: 15px;
+//     width: 94%;
+//     background: #f5f5f5;
+//     border-radius: 3px;
+//     margin-bottom: 20px;
+//     border: 0;
+//     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -o-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     transition: all 0.2s linear;
+//     -moz-transition: all 0.2s linear;
+//     -webkit-transition: all 0.2s linear;
+//     -o-transition: all 0.2s linear;
+// }
 
-#contact-formular input[type=text]:focus,
-#contact-formular textarea:focus,
-input[type=email]:focus,
-#contact-formular input[type=email]:focus {
-    background-color: #e1e1e1;
-}
+// #contact-formular input[type=text]:focus,
+// #contact-formular textarea:focus,
+// input[type=email]:focus,
+// #contact-formular input[type=email]:focus {
+//     background-color: #e1e1e1;
+// }
 
-#contact-formular textarea {
-    height: 160px;
-    resize: none;
-}
+// #contact-formular textarea {
+//     height: 160px;
+//     resize: none;
+// }
 
-#contact-formular input[type="submit"],
-input[type="submit"] {
-    color: #fff;
-    font-family: $font-family;
-    font-size: 14px;
-    text-transform: uppercase;
-    padding: 10px 15px;
-    letter-spacing: 0;
-    line-height: 14px;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -webkit-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    text-align: center;
-}
+// #contact-formular input[type="submit"],
+// input[type="submit"] {
+//     color: #fff;
+//     font-family: $font-family;
+//     font-size: 14px;
+//     text-transform: uppercase;
+//     padding: 10px 15px;
+//     letter-spacing: 0;
+//     line-height: 14px;
+//     cursor: pointer;
+//     border-radius: 3px;
+//     transition: all 0.3s ease 0s;
+//     -moz-transition: all 0.3s ease 0s;
+//     -webkit-transition: all 0.3s ease 0s;
+//     -o-transition: all 0.3s ease 0s;
+//     text-align: center;
+// }
 
 .error_message {
     text-align: center;
@@ -2989,42 +2989,42 @@ blockquote {
     background-color: #f5f5f5;
 }
 
-#commentsform input[type="text"],
-textarea {
-    color: #999999;
-    font-family: $font-family;
-    font-size: 14px;
-    height: 20px;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    width: 90%;
-    background: #f5f5f5;
-    border-radius: 3px;
-    margin-bottom: 20px;
-    border: 0;
-    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -o-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-}
+// #commentsform input[type="text"],
+// textarea {
+//     color: #999999;
+//     font-family: $font-family;
+//     font-size: 14px;
+//     height: 20px;
+//     padding-left: 5%;
+//     padding-right: 5%;
+//     padding-top: 15px;
+//     padding-bottom: 15px;
+//     width: 90%;
+//     background: #f5f5f5;
+//     border-radius: 3px;
+//     margin-bottom: 20px;
+//     border: 0;
+//     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -o-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     transition: all 0.2s linear;
+//     -moz-transition: all 0.2s linear;
+//     -webkit-transition: all 0.2s linear;
+//     -o-transition: all 0.2s linear;
+// }
 
-#commentsform input[type=text]:focus,
-#commentsform textarea:focus,
-input[type=email]:focus {
-    background-color: #e1e1e1;
-}
+// #commentsform input[type=text]:focus,
+// #commentsform textarea:focus,
+// input[type=email]:focus {
+//     background-color: #e1e1e1;
+// }
 
-#commentsform textarea {
-    height: 90px;
-    resize: none;
-}
-/* Sidebar */
+// #commentsform textarea {
+//     height: 90px;
+//     resize: none;
+// }
+// /* Sidebar */
 
 #sidebar {
     width: 250px;
@@ -3044,32 +3044,32 @@ input[type=email]:focus {
     color: #222222;
 }
 
-input#search {
-    background: url("images/zoom-search.png") no-repeat 10px 10px #f5f5f5;
-    background-size: 30px 30px;
-    color: #999999;
-    font-family: $font-family;
-    font-size: 14px;
-    height: 20px;
-    padding: 15px;
-    padding-left: 45px;
-    width: 190px;
-    border-radius: 3px;
-    border: 0;
-    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    -o-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
-    transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-}
+// input#search {
+//     background: url("images/zoom-search.png") no-repeat 10px 10px #f5f5f5;
+//     background-size: 30px 30px;
+//     color: #999999;
+//     font-family: $font-family;
+//     font-size: 14px;
+//     height: 20px;
+//     padding: 15px;
+//     padding-left: 45px;
+//     width: 190px;
+//     border-radius: 3px;
+//     border: 0;
+//     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -moz-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -webkit-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     -o-box-shadow: 0 0px 3px rgba(0, 0, 0, 0.22) inset;
+//     transition: all 0.2s linear;
+//     -moz-transition: all 0.2s linear;
+//     -webkit-transition: all 0.2s linear;
+//     -o-transition: all 0.2s linear;
+// }
 
-input#search:focus {
-    background: url("images/zoom-search.png") no-repeat 10px 10px #e1e1e1;
-    background-size: 30px 30px;
-}
+// input#search:focus {
+//     background: url("images/zoom-search.png") no-repeat 10px 10px #e1e1e1;
+//     background-size: 30px 30px;
+// }
 
 #sidebar .widget ul li ul li:first-child {
     margin-top: 15px;
