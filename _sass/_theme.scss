@@ -67,8 +67,8 @@ select {
 
 html,
 body {
-    font-family: $font-family;
-    font-size: 14px;
+    font-family: $base-font-family;
+    font-size: $font-size-base;
     height: 100%;
     width: 100%;
     color: #444;
@@ -86,7 +86,7 @@ h4,
 h5,
 h6 {
     font-weight: 400;
-    font-family: 'Apercu', sans-serif;
+    font-family: $alt-font-family;
     text-transform: uppercase;
     color: #222222;
 }
@@ -99,9 +99,6 @@ h1 {
     margin-bottom: 15px;
 }
 
-p {
-    font-size: 14px;
-}
 
 b {
     color: #222;
@@ -1608,11 +1605,9 @@ ul.technology {
 ul.technology li {
     display: inline-block;
     text-align: left;
-    font-family: $font-family;
+    font-family: $base-font-family;
     //background-image: url('http://rustbeltriderscomposting.com/wp-content/themes/newave-theme/images/Rust-Belt-Riders-Logo.png');
-    width: 238px;
     margin: 10px;
-    padding: 30px 20px;
     position: relative;
     /*overflow:hidden;
     transition:all 0.3s ease 0s;
@@ -1649,7 +1644,7 @@ ul.technology li i {
 
 ul.technology li h5 {
     text-transform: uppercase;
-    font-family: 'Apercu', sans-serif;
+    font-family: $alt-font-family;
     color: #222222;
     margin-top: 10px;
     transition: all 0.3s ease 0s;
@@ -1659,7 +1654,6 @@ ul.technology li h5 {
 }
 
 ul.technology li p {
-    font-size: 13px;
     margin-top: 10px;
     transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -2393,7 +2387,7 @@ div.mc-image {
     background: none;
     border-radius: 3px 3px 3px 3px;
     color: rgba(255, 255, 255, 0.5);
-    font-family: $font-family;
+    font-family: $base-font-family;
     font-size: 14px;
     padding: 45px 0 25px 0;
     text-align: center;
@@ -2403,7 +2397,7 @@ div.mc-image {
 .project-counters .counters li .count {
     border-radius: 3px 3px 3px 3px;
     color: #fff;
-    font-family: $font-family;
+    font-family: $base-font-family;
     font-size: 70px;
     padding: 25px 0;
     text-align: center;
@@ -2495,7 +2489,7 @@ div.mc-image {
     text-align: center;
     font-size: 72px;
     line-height: 72px;
-    font-family: $font-family;
+    font-family: $base-font-family;
     padding: 10px 20px;
     border-radius: 3px;
     margin-bottom: 30px;
@@ -2530,7 +2524,7 @@ h5.company-address {
 // input[type="text"],
 // input[type="email"] {
 //     color: #999999;
-//     font-family: $font-family;
+//     font-family: $base-font-family;
 //     font-size: 14px;
 //     height: 20px;
 //     padding-left: 3%;
@@ -2567,7 +2561,7 @@ h5.company-address {
 // #contact-formular input[type="submit"],
 // input[type="submit"] {
 //     color: #fff;
-//     font-family: $font-family;
+//     font-family: $base-font-family;
 //     font-size: 14px;
 //     text-transform: uppercase;
 //     padding: 10px 15px;
@@ -2916,7 +2910,7 @@ blockquote {
     background-size: 21px 17px;
     background-position: left 8px;
     background-repeat: no-repeat;
-    font-family:$font-family;
+    font-family:$base-font-family;
     font-size: 22px;
     font-style: italic;
     line-height: 30px;
@@ -2955,7 +2949,7 @@ blockquote {
 
 .comment-date {
     color: #ABABAB;
-    font-family: $font-family;
+    font-family: $base-font-family;
     font-style: italic;
     margin-bottom: 10px;
 }
@@ -2992,7 +2986,7 @@ blockquote {
 // #commentsform input[type="text"],
 // textarea {
 //     color: #999999;
-//     font-family: $font-family;
+//     font-family: $base-font-family;
 //     font-size: 14px;
 //     height: 20px;
 //     padding-left: 5%;
@@ -3048,7 +3042,7 @@ blockquote {
 //     background: url("images/zoom-search.png") no-repeat 10px 10px #f5f5f5;
 //     background-size: 30px 30px;
 //     color: #999999;
-//     font-family: $font-family;
+//     font-family: $base-font-family;
 //     font-size: 14px;
 //     height: 20px;
 //     padding: 15px;
