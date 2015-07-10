@@ -40,3 +40,20 @@ p.oops {
 .fa-input {
   font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+body.sign-up {
+
+  .form-content {
+    display:block;
+    min-height:200px;
+  }
+}
+
+#typeForm {
+  select {
+    border-bottom: 2px solid #ddd;
+    cursor: pointer;
+    padding:4px;
+    background-color:#eee;
+  }
+}

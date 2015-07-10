@@ -1,6 +1,7 @@
 <div class="anim-zoom-out-full">
   <h3>Success! You are eligible</h3>
   <form id="enrollmentForm" class="form-vertical">
+  <div class="form-content">
     <legend>Enroll in our Service</legend>
     <fieldset>
       <div data-ng-show="account.type == 'commercial'" class="form-group">
@@ -30,6 +31,7 @@
         <input type="text" name="email" class="form-control" data-ng-model="account.email" data-ng-required />
       </div>
     </fieldset>
+    </div>
     <div class="form-group well well-sm text-align-right">
       <button class="btn btn-primary btn-lg" data-ng-mouseup="submitAccount()"><span class="fa fa-envelope"></span>&nbsp; Get Updates</button>
     </div>

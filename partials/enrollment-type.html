@@ -1,16 +1,17 @@
 <div class="anim-slide-left">
 <form  id="typeForm" name="typeForm" data-ng-submit="typeSubmit(typeForm.$valid)">
+<div class="form-content">
   <div class="form-group">
     <span class="lead">
 
-    I am a
-      <select data-ng-model="account.type">
-        <option value="residential">Household</option>
-        <option value="commercial">Business</option>
-      </select>
-      looking to reduce my enviornmental impact
-
-  </span>
+      I am a
+        <select data-ng-model="account.type">
+          <option value="residential">Household</option>
+          <option value="commercial">Business</option>
+        </select>
+        looking to reduce my enviornmental impact
+    </span>
+    </div>
   </div>
   <div class="form-group well well-sm text-align-right">
     <input  type="submit" class="btn btn-lg btn-primary fa-input" value="Next &#xf178;">

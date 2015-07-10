@@ -1,9 +1,8 @@
 
 <div class="wrapper anim-slide-left">
 <form id="notifyForm" name="notifyForm" class="form-vertical" ng-submit="signUpForUpdates(notifyForm.$valid)">
+<div class="form-content">
   <p class="oops" data-ng-repeat="message in messages">{{message}}</p>
-
-
   <legend>Learn More about our Service</legend>
   <fieldset>
     <div data-ng-show="account.type == 'commercial'" class="form-group">
@@ -27,7 +26,9 @@
       <input type="text" name="email" class="form-control" data-ng-model="account.email" data-ng-required />
     </div>
     </fieldset>
+    </div>
     <div class="form-group well well-sm text-align-right">
-      <button type="submit" class="btn btn-primary btn-lg" value="Get Updates"><span class="fa fa-envelope"></span>&nbsp; Get Updates</button </div>
+      <input type="submit" class="btn btn-primary btn-lg" value="Get Updates"><span data-ng-show="isWaiting" class="fa fa-spinner fa-spin"></span>
+      </div>
   </form>
 </div>

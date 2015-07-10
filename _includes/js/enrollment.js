@@ -109,6 +109,7 @@
         controller: function($scope, account, messageStrings, enrollmentEnabled, $stateParams, rbrCustomerData) {
           $scope.account = account;
           $scope.messages = [messageStrings.thankYou];
+          $scope.isWaiting = false;
           console.log($stateParams);
 
           switch ($stateParams.reason) {
@@ -254,14 +255,13 @@
     return methods;
   }]);
 
-  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl', '$scope', function($http, $q, serverUrl, $scope) {
+  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl', function($http, $q, serverUrl) {
     return {
       submit: function(account){
         $http.post(serverUrl, account)
 
         .success(function(data, status, headers, config){
           console.log('whoo');
-          $scope.isWaiting = false;
         })
         .error(function(data, status, headers, config){
           console.log(data);
