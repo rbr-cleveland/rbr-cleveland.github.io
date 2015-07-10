@@ -106,7 +106,7 @@
       .state('enrollmentNotify', {
         url: "/notify/:reason",
         templateUrl: "/partials/enrollment-notify.html",
-        controller: function($scope, account, messageStrings, enrollmentEnabled, $stateParams) {
+        controller: function($scope, account, messageStrings, enrollmentEnabled, $stateParams, rbrCustomerData) {
           $scope.account = account;
           $scope.messages = [messageStrings.thankYou];
           console.log($stateParams);
@@ -124,6 +124,9 @@
                 $scope.messages.push(messageStrings.notInOurServiceRegionResidential);
               }
               break;
+          }
+          $scope.signUpForUpdates = function(){
+            rbrCustomerData.submit($scope.account);
           }
 
           $scope.messages.push(messageStrings.signUpBelow);
