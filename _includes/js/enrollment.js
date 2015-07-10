@@ -4,7 +4,7 @@
 
   rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out']);
 
-  rbrEnrollment.value('serverUrl', "{{site.config.serverurl}}");
+  rbrEnrollment.value('serverUrl', "https://rbr-backend.herokuapp.com");
 
   rbrEnrollment.value('mapItems', {
     residential: '/geoms/residential.json',
@@ -248,7 +248,7 @@
     return methods;
   }]);
 
-  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl' function($http, $q, serverUrl) {
+  rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl', function($http, $q, serverUrl) {
     return {
       submit: function(account){
         $http.post(serverUrl, account)
