@@ -4,7 +4,7 @@
 
   rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out']);
 
-  rbrEnrollment.value('serverUrl', "https://rbr-backend.herokuapp.com");
+  rbrEnrollment.value('serverUrl', "https://rbr-backend.herokuapp.com/api/new-account/");
 
   rbrEnrollment.value('mapItems', {
     residential: '/geoms/residential.json',
