@@ -12,9 +12,9 @@ section: home
         <div class="container ">
             <!-- Section Title -->
             <div class="section-title">
-                <h1>About</h1>
+                <h1>{{site.data.sections.about.heading}}</h1>
                 <span class="border"></span>
-                <p>We are a fee for service waste removal program available to Cleveland residents. We provide an easy way for your home to reduce its carbon footprint while supporting the ongoing efforts of community gardens in your neighborhood.</p>
+                <p>{{site.data.sections.about.text}}</p>
             </div>
             <!-- Button trigger modal -->
 
@@ -29,9 +29,9 @@ section: home
         <div class="container ">
             <!-- Section Title -->
             <div class="section-title">
-                <h1>FAQ</h1>
+                <h1>{{site.data.sections.faq.heading}}</h1>
                 <span class="border"></span>
-                <p>Here are some typical questions that we get about composting and our services.</p>
+                <p>{{site.data.sections.faq.text}}</p>
             </div>
             <!--/Section Title -->
             <ul class="technology row">
@@ -97,12 +97,12 @@ section: home
               <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingOne">
                 <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.index}}" aria-expanded="true" aria-controls="collapseOne">
                     {{faq.title}}
                   </a>
                 </h4>
               </div>
-              <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div id="collapse{{forloop.index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                   {{faq.content}}
                 </div>
