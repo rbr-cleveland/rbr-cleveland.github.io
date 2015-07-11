@@ -32,6 +32,10 @@
 #navigation-sticky-wrapper {
   height:45px;
 }
+
+.navbar {
+  margin-bottom:0;
+}
 .navbar-inner {
   background: none;
   box-shadow: none !important;
@@ -51,9 +55,7 @@
 .navbar-inner .container {
   padding:20px 0;
 }
-.navbar {
-  position: relative;
-}
+
 .navbar .nav {
   text-align:right;
    li {

@@ -2,7 +2,7 @@
 
   var rbrEnrollment;
 
-  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out', 'ui.bootstrap.showErrors', 'LocalStorageModule']);
+  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out', 'ui.bootstrap.showErrors', 'LocalStorageModule', 'ngMask']);
 
   rbrEnrollment.value('serverUrl', "https://rbr-backend.herokuapp.com/api/new-account/");
 
@@ -209,10 +209,11 @@
 
         }
       });
-  }]).run(function($rootScope){
+  }]).run(function($rootScope, $http, serverUrl){
     $rootScope.$on('$stateChangeSuccess', function() {
        document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
+    $http.get("https://rbr-backend.herokuapp.com/api/awake");
   });
 
   rbrEnrollment.factory('rbrServiceArea', ['$http', '$q', 'mapItems', function($http, $q, mapItems) {

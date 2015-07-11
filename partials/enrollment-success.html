@@ -27,13 +27,13 @@
         <div class="col-xs-9">
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" name="phone" class="form-control" data-ng-model="account.phone" mask="(999) 999-9999" clean="true" data-ng-minlength="10"  data-ng-maxlength="10" data-ng-required="true" />
+            <input type="text" name="phone" class="form-control" data-ng-model="account.phone" mask="(999) 999-9999" clean="true" data-ng-minlength="14"  data-ng-maxlength="14" data-ng-required="true" />
           </div>
         </div>
         <div class="col-xs-3">
           <div class="form-group">
             <label for="phoneExt">Ext</label>
-            <input type="text" name="phoneExt" class="form-control" maxlength="10" data-ng-model="account.phoneExt" />
+            <input type="text" name="phoneExt" class="form-control" data-ng-model="account.phoneExt" />
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
       </div>
     </fieldset>
     </div>
-    <div class="form-group well well-sm text-align-right">
+    <div class="form-group well well-sm text-right">
       <button class="btn btn-primary btn-lg" data-ng-disabled="!enrollmentForm.$valid" type="submit">
       <span class="fa fa-envelope"></span> Get Updates <span data-ng-show="isWaiting" class="fa fa-spinner fa-spin"></span></button>
 
