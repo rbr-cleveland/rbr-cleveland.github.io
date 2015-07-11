@@ -1,39 +1,52 @@
 <div class="anim-zoom-out-full">
-  <h3>Success! You are eligible</h3>
-  <form id="enrollmentForm" class="form-vertical">
+  <h3>{{messageStrings.successHeader}}</h3>
+  <p>{{messageStrings.successInfo}}</p>
+  <form id="enrollmentForm" name="enrollmentForm" data-ng-submit="submitAccount(enrollmentForm.$valid)" class="form-vertical">
   <div class="form-content">
-    <legend>Enroll in our Service</legend>
+    <legend>{{messageStrings.successNextStepHeader}}</legend>
     <fieldset>
       <div data-ng-show="account.type == 'commercial'" class="form-group">
         <label for="company">Company Name</label>
-        <input type="text" name="company" class="form-control" data-ng-model="account.company" data-ng-required />
+        <input type="text" name="company" class="form-control" data-ng-model="account.company" data-ng-required="account.type == 'commercial'" />
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
             <label for="firstname">First Name</label>
-            <input type="text" name="firstname" class="form-control" data-ng-model="account.firstname" data-ng-required />
+            <input type="text" name="firstname" class="form-control" data-ng-model="account.firstname" data-ng-minlength="2" data-ng-required="true" />
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label for="lastname">Last Name</label>
-            <input type="text" name="lastname" class="form-control" data-ng-model="account.lastname" data-ng-required />
+            <input type="text" name="lastname" class="form-control" data-ng-model="account.lastname" data-ng-minlength="2" data-ng-required="true" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-9">
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" class="form-control" data-ng-model="account.phone" mask="(999) 999-9999" clean="true" data-ng-minlength="10"  data-ng-maxlength="10" data-ng-required="true" />
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="phoneExt">Ext</label>
+            <input type="text" name="phoneExt" class="form-control" maxlength="10" data-ng-model="account.phoneExt" />
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="text" name="phone" class="form-control" data-ng-model="account.phone" data-ng-required />
-      </div>
-      <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="text" name="email" class="form-control" data-ng-model="account.email" data-ng-required />
+        <input type="email" name="email" class="form-control" data-ng-model="account.email" data-ng-required="true" />
       </div>
     </fieldset>
     </div>
     <div class="form-group well well-sm text-align-right">
-      <button class="btn btn-primary btn-lg" data-ng-mouseup="submitAccount()"><span class="fa fa-envelope"></span>&nbsp; Get Updates</button>
+      <button class="btn btn-primary btn-lg" data-ng-disabled="!enrollmentForm.$valid" type="submit">
+      <span class="fa fa-envelope"></span> Get Updates <span data-ng-show="isWaiting" class="fa fa-spinner fa-spin"></span></button>
+
     </div>
   </form>
 </div>

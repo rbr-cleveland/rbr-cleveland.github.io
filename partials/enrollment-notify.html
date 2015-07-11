@@ -7,28 +7,31 @@
   <fieldset>
     <div data-ng-show="account.type == 'commercial'" class="form-group">
       <label for="company">Company Name</label>
-      <input type="text" name="company" class="form-control" data-ng-model="account.company" data-ng-required />
+      <input type="text" name="company" class="form-control" data-ng-minlength="2" data-ng-model="account.company" data-ng-required="account.type == 'commercial'" />
     </div>
-    <div class="form-group">
+    <div class="form-group" show-errors>
       <div class="row">
         <div class="col-md-6">
           <label for="firstname">First Name</label>
-          <input type="text" name="firstname" class="form-control" data-ng-model="account.firstname" data-ng-required />
+          <input type="text" name="firstname" class="form-control" data-ng-minlength="2" data-ng-model="account.firstname" data-ng-required="true" />
         </div>
         <div class="col-md-6">
         <label for="lastname">Last Name</label>
-          <input type="text" name="lastname" class="form-control" data-ng-model="account.lastname" data-ng-required />
+          <input type="text" name="lastname" class="form-control" data-ng-minlength="2" data-ng-model="account.lastname" data-ng-required="true" />
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" show-errors>
       <label for="email">Email Address</label>
-      <input type="text" name="email" class="form-control" data-ng-model="account.email" data-ng-required />
+      <input type="text" name="email" class="form-control" data-ng-model="account.email" data-ng-required="true" />
     </div>
     </fieldset>
     </div>
     <div class="form-group well well-sm text-align-right">
-      <input type="submit" class="btn btn-primary btn-lg" value="Get Updates"><span data-ng-show="isWaiting" class="fa fa-spinner fa-spin"></span>
+      <button data-ng-disabled="notifyForm.$invalid" type="submit" class="btn btn-primary btn-lg">
+        <span class="fa fa-envelope"></span> Get Updates
+        <span data-ng-show="isWaiting" class="fa fa-spinner fa-spin"></span>
+      </button>
       </div>
   </form>
 </div>

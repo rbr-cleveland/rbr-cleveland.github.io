@@ -1,5 +1,5 @@
 <div class="wrapper anim-slide-left">
-<h1>{{addressHeader}} </h1>
+<h3>{{addressHeader}} </h3>
 <form id="addressForm" class="form-vertical" name="addressForm" data-ng-submit="isInServiceArea(addressForm.$valid)">
 <div class="form-content">
   <div class="form-group">
@@ -21,7 +21,9 @@
   </div>
   </div>
   <div class="form-group well well-sm text-align-right">
-    <button ng-disabled="!addressForm.$valid" class="btn btn-lg btn-primary" type="submit">Next&nbsp;&nbsp;<span class="fa fa-arrow-right"></span></button>
+    <button ng-disabled="!addressForm.$valid" class="btn btn-lg btn-primary" type="submit">Next&nbsp;&nbsp;
+    <span class="fa fa-arrow-right"></span>
+    </button>
   </div>
 </form>
 </div>

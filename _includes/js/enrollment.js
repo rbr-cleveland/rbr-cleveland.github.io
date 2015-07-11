@@ -2,13 +2,20 @@
 
   var rbrEnrollment;
 
-  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out']);
+  rbrEnrollment = angular.module('rbrEnrollment', ['ui.router', 'ngAnimate', 'anim-in-out', 'ui.bootstrap.showErrors', 'LocalStorageModule']);
 
   rbrEnrollment.value('serverUrl', "https://rbr-backend.herokuapp.com/api/new-account/");
 
   rbrEnrollment.value('mapItems', {
     residential: '/geoms/residential.json',
     commercial: '/geoms/commercial.json'
+  });
+
+  rbrEnrollment.config(function (localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('rbr-account')
+      .setStorageType('sessionStorage')
+      .setNotify(true, true)
   });
 
   rbrEnrollment.value('enrollmentEnabled', {
@@ -22,14 +29,39 @@
     {% endfor %}
   });
 
-  rbrEnrollment.factory('account', function() {
-    return {
+  rbrEnrollment.factory('account', function(localStorageService) {
+
+    var defaultAccount = {
       type: 'residential',
       eligible: false,
       inServiceArea: false,
-      status: false
+      status: false,
+      firstname: "",
+      lastname: "",
+      company: null,
+      email: ""
+    };
+
+    return {
+      set: function(val) {
+        localStorageService.set('account', val);
+      },
+      get: function() {
+        var account = localStorageService.get('account');
+        if (!account){
+          account = defaultAccount;
+        }
+        return account;
+      },
+      clear: function() {
+        localStorageService.remove('account');
+      }
     };
   });
+
+  rbrEnrollment.config(['showErrorsConfigProvider', function(showErrorsConfigProvider) {
+    showErrorsConfigProvider.showSuccess(true);
+  }]);
 
   rbrEnrollment.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
     // // For any unmatched url, redirect to /state1
@@ -44,13 +76,13 @@
         url: "/",
         templateUrl: "/partials/enrollment-type.html",
         controller: function($scope, account, enrollmentEnabled, $state, messageStrings) {
-          $scope.account = account;
-          $scope.account.type = account.type = 'residential';
+          $scope.account = account.get();
 
           $scope.messageStrings = messageStrings;
 
           $scope.typeSubmit = function(isValid) {
             if (isValid){
+              account.set($scope.account);
               enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', { reason: "enrollment-disabled" });
             }
           }
@@ -59,8 +91,12 @@
       .state('enrollmentAddress', {
         url: "/address",
         templateUrl: "/partials/enrollment-address.html",
-        controller: function($scope, account, rbrServiceArea, $state, messageStrings) {
-          $scope.account = account;
+        controller: function($scope, account, rbrServiceArea, $state, messageStrings, enrollmentEnabled) {
+          $scope.account = account.get();
+          $scope.$broadcast('show-errors-check-validity');
+          if(!enrollmentEnabled[$scope.account.type]) {
+            $state.go('enrollmentNotify')
+          }
           $scope.account.address = $scope.account.address || {
             street1: "",
             street2: "",
@@ -68,8 +104,7 @@
             state: "OH",
             zip: ""
           };
-
-          $scope.addressHeader = account.type == 'residential' ? messageStrings.addressHeaderResidential : messageStrings.addressHeaderCommercial;
+          $scope.addressHeader = $scope.account.type == 'residential' ? messageStrings.addressHeaderResidential : messageStrings.addressHeaderCommercial;
 
           $scope.subscriberInServiceArea = false;
 
@@ -81,6 +116,7 @@
                 // Now
                 if ($scope.account.inServiceArea) {
                   $scope.account.eligible = true;
+                  account.set($scope.account);
                   $state.go('enrollmentSuccess')
                 } else {
                   $state.go('enrollmentNotify', {
@@ -95,19 +131,34 @@
       .state('enrollmentSuccess', {
         url: "/success",
         templateUrl: "/partials/enrollment-success.html",
-        controller: function($scope, account, rbrCustomerData) {
-          $scope.account = account;
-
+        controller: function($scope, account, rbrCustomerData, messageStrings, $state) {
+          $scope.account = account.get();
+          $scope.messageStrings = messageStrings;
+          $scope.isWaiting = false;
           $scope.submitAccount = function(){
-            rbrCustomerData.submit($scope.account);
+            $scope.isWaiting = true;
+            var submit = rbrCustomerData.submit($scope.account);
+
+            submit.then(function(result){
+              $scope.isWaiting = false;
+              $scope.status = result;
+              console.log(result);
+              account.set($scope.account);
+              $state.go('enrollmentFinished');
+            }), function(reason){
+              $scope.isWaiting = false;
+              $scope.status = reason;
+              console.log(reason);
+            }
           }
         }
       })
       .state('enrollmentNotify', {
         url: "/notify/:reason",
         templateUrl: "/partials/enrollment-notify.html",
-        controller: function($scope, account, messageStrings, enrollmentEnabled, $stateParams, rbrCustomerData) {
-          $scope.account = account;
+        controller: function($scope, account, messageStrings, enrollmentEnabled, $stateParams, rbrCustomerData, $state) {
+          $scope.account = account.get();
+          $scope.$broadcast('show-errors-check-validity');
           $scope.messages = [messageStrings.thankYou];
           $scope.isWaiting = false;
           console.log($stateParams);
@@ -119,7 +170,7 @@
               break;
 
             case "not-in-service-area":
-              if (account.type == 'commercial') {
+              if ($scope.account.type == 'commercial') {
                 $scope.messages.push(messageStrings.notInOurServiceRegionCommericial);
               } else {
                 $scope.messages.push(messageStrings.notInOurServiceRegionResidential);
@@ -128,7 +179,19 @@
           }
           $scope.signUpForUpdates = function(){
             $scope.isWaiting = true;
-            rbrCustomerData.submit($scope.account);
+            var submit = rbrCustomerData.submit($scope.account);
+
+            submit.then(function(result){
+              $scope.isWaiting = false;
+              $scope.status = result;
+              console.log(result);
+              account.set($scope.account);
+              $state.go('enrollmentFinished');
+            }), function(reason){
+              $scope.isWaiting = false;
+              $scope.status = reason;
+              console.log(reason);
+            }
           }
 
           $scope.messages.push(messageStrings.signUpBelow);
@@ -142,11 +205,15 @@
         url: "/finished",
         templateUrl: "/partials/enrollment-finished.html",
         controller: function($scope, account) {
-          $scope.account = account;
+          $scope.account = account.get();
 
         }
       });
-  }]);
+  }]).run(function($rootScope){
+    $rootScope.$on('$stateChangeSuccess', function() {
+       document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+  });
 
   rbrEnrollment.factory('rbrServiceArea', ['$http', '$q', 'mapItems', function($http, $q, mapItems) {
 
@@ -258,14 +325,18 @@
   rbrEnrollment.service('rbrCustomerData', ['$http', '$q', 'serverUrl', function($http, $q, serverUrl) {
     return {
       submit: function(account){
-        $http.post(serverUrl, account)
+        return $q(function(resolve, reject){
+          $http.post(serverUrl, account)
 
-        .success(function(data, status, headers, config){
-          console.log('whoo');
-        })
-        .error(function(data, status, headers, config){
-          console.log(data);
-        })
+          .success(function(data, status, headers, config){
+            resolve(data);
+          })
+          .error(function(data, status, headers, config){
+            reject(data);
+          })
+        });
+
+
       }
     }
 

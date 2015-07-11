@@ -41,5 +41,14 @@ messages:
   - key: notInOurServiceRegionResidential
     text: "Unfortunately, your home is not currently in our service area."
 
+  - key: successHeader
+    text: "Success! You are eligible"
+
+  - key: successInfo
+    text: "You fall within our service region and thus are eligible for service."
+
+  - key: successNextStepHeader
+    text: "Enroll in our Service"
+
   - key: signUpBelow
     text: "Please sign up below and we will notify you once we can provide our service to you!"
