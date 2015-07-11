@@ -1,0 +1,33 @@
+about:
+  heading: About
+  text: >
+    We are a fee for service waste removal program available
+    to Cleveland residents. We provide an easy way for your home to reduce
+    its carbon footprint while supporting the ongoing efforts of community
+    gardens in your neighborhood.
+faq:
+  heading: FAQ
+  text: >
+    Here are some typical questions that we get about
+    composting and our services.
+
+whycompost:
+  heading: Why Compost?
+  text: >
+    The United States EPA estimates that as much as 24% of all household
+    waste is compostable. When food scraps are sent to landfills their
+    decomposition process produces methane, a greenhouse gas twenty times
+    more damaging to the o-zone than carbon dioxide. By diverting these food
+    scraps away from land fills and into nutrient rich soil amendments we
+    can help restore soil health, advance the work of local food production,
+    and reduce our ecological footprints.
+
+whycoop:
+  heading: Why a Worker's Co-op?
+  text: >
+    Rust Belt Riders Composting believes in the value of workers across
+    all sectors and our respect for work manifests itself in the belief that
+    all employees ought to share in the success of the company. For us, this
+    takes shape in the form ofworker-ownership. All employees are co-owners,
+    making decisions with one another to best meet the needs of our employees,
+    the community, and the planet.
