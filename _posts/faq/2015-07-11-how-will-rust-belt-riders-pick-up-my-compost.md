@@ -2,7 +2,7 @@
 layout: faq
 category: faq
 published: false
-title: "How Will Rust Belt Riders Pick Up My Compost?"
+title: "How Will Rust Belt Riders Composting Pick Up My Compost?"
 faqtype: general
 ---
 
