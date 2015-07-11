@@ -1,0 +1,42 @@
+{% assign faqs = site.categories.faq | where: "faqtype", include.type %}
+{% if include.display == 'grid' %}
+  {% for faq in faqs %}
+      {% assign loopindex = forloop.index | modulo: 2 %}
+      {% if loopindex == 1 %}
+        <ul class="technology row">
+          <div class="col-md-6 text-align-left" >
+            <li>
+               <h5>{{faq.title}}</h5>
+              <p>{{faq.content}}</p>
+            </li>
+          </div>
+      {% else %}
+         <div class="col-md-6 text-align-left">
+            <li>
+               <h5>{{faq.title}}</h5>
+              <p>{{faq.content}}</p>
+            </li>
+          </div>
+        </ul>
+      {% endif %}
+  {% endfor %}
+{% elsif include.display == 'accordion' %}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  {% for faq in faqs %}
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="heading{{forLoop.index}}">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.index}}" aria-expanded="true" aria-controls="collapseOne">
+          {{faq.title}}
+        </a>
+      </h4>
+    </div>
+    <div id="collapse{{forloop.index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{forLoop.index}}">
+      <div class="panel-body">
+        {{faq.content}}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endif %}

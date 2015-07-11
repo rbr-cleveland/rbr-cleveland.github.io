@@ -34,18 +34,7 @@ section: home
                 <p class="lead">{{site.data.sections.faq.text}}</p>
             </div>
             <!--/Section Title -->
-            <ul class="technology row">
-              {% for faq in site.categories.faq %}
-                {% if faq.faqtype == 'general' %}
-                <div class="col-md-4 text-align-left">
-                    <li class="element_fade_in" style="opacity: 1; right: 0px;">
-                        <h5>{{faq.title}}</h5>
-                        <p>{{faq.content}}</p>
-                    </li>
-                </div>
-                {% endif %}
-              {% endfor %}
-            </ul>
+            {% include components/faq.html site='site' type='general' display='grid' %}
         </div>
         <!-- Container -->
     </section>
@@ -61,19 +50,7 @@ section: home
                 <p class="lead">The United States EPA estimates that as much as 24% of all household waste is compostable. When food scraps are sent to landfills their decomposition process produces methane, a greenhouse gas twenty times more damaging to the o-zone than carbon dioxide. By diverting these food scraps away from land fills and into nutrient rich soil amendments we can help restore soil health, advance the work of local food production, and reduce our ecological footprints.
                 </p>
             </div>
-            <!--/Section Title -->
-            <ul class="technology row">
-            {% for faq in site.categories.faq %}
-                {% if faq.faqtype == 'compost' %}
-                <div class="col-md-4 text-align-left">
-                    <li class="element_fade_in" style="opacity: 1; right: 0px;">
-                        <h5>{{faq.title}}</h5>
-                        <p>{{faq.content}}</p>
-                    </li>
-                </div>
-            {% endif %}
-            {% endfor %}
-            </ul>
+            {% include components/faq.html site='site' type='compost' display='grid' %}
         </div>
         <!-- Container -->
     </section>
@@ -88,29 +65,7 @@ section: home
                 <span class="border"></span>
                 <p class="lead">Rust Belt Riders Composting believes in the value of workers across all sectors and our respect for work manifests itself in the belief that all employees ought to share in the success of the company. For us, this takes shape in the form ofworker-ownership. All employees are co-owners, making decisions with one another to best meet the needs of our employees, the community, and the planet.</p>
             </div>
-            <!--/Section Title -->
-            <dl class="accordion">
-
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            {% for faq in site.categories.faq %}
-              {% if faq.faqtype == 'coop' %}
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.index}}" aria-expanded="true" aria-controls="collapseOne">
-                    {{faq.title}}
-                  </a>
-                </h4>
-              </div>
-              <div id="collapse{{forloop.index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                  {{faq.content}}
-                </div>
-              </div>
-            </div>
-            {% endif %}
-          {% endfor %}
-            </div>
+            {% include components/faq.html site='site' type='coop' display='accordion' %}
         </div>
         <!-- Container -->
     </section>

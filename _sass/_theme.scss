@@ -515,7 +515,7 @@ footer {
     display:block;
     width: 60%;
     position: relative;
-    min-height:600px;
+    height:100%;
     top:0;
     /*position:relative!important;*/
 
@@ -526,7 +526,7 @@ footer {
     background-size: contain;
     @media (max-width: $screen-sm-max) {
         width: 90%;
-        min-height:200px;
+        height:300px;
      }
 }
 /*.div-align-center {
@@ -659,57 +659,6 @@ footer {
 
     z-index: 0;
 }
-/* We are good at */
-
-.bar {
-    text-align: left!important;
-    margin: 0px!important;
-}
-
-.bar li {
-    list-style: none!important;
-}
-
-.bar li:last-child span {
-    margin-bottom: 0px;
-}
-
-.bar li .bar-wrap {
-    margin-bottom: 50px;
-    border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    -o-border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    background: #dddddd;
-}
-
-.bar li span {
-    height: 35px;
-    width: 0px;
-    display: block;
-    border-radius: 3px 3px 3px 3px;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    -o-border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-}
-
-.bar li p {
-    padding-bottom: 2px;
-}
-
-.bar li span {
-    overflow: visible!important;
-    position: relative;
-}
-
-.bar li span strong {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 12px!important;
-    display: block;
-}
 
 
 /* We love technology */
@@ -759,7 +708,7 @@ ul.technology li i {
 }
 
 ul.technology li h5 {
-    text-transform: uppercase;
+    font-size: ($font-size-base + 2);
     font-family: $alt-font-family;
     color: #222222;
     margin-top: 10px;
