@@ -47,8 +47,7 @@ section: home
             <div class="section-title">
                 <h1>Why Compost?</h1>
                 <span class="border"></span>
-                <p class="lead">The United States EPA estimates that as much as 24% of all household waste is compostable. When food scraps are sent to landfills their decomposition process produces methane, a greenhouse gas twenty times more damaging to the o-zone than carbon dioxide. By diverting these food scraps away from land fills and into nutrient rich soil amendments we can help restore soil health, advance the work of local food production, and reduce our ecological footprints.
-                </p>
+                <p class="lead">{{site.data.sections.whycompost.text}}</p>
             </div>
             {% include components/faq.html site='site' type='compost' display='grid' %}
         </div>
@@ -63,7 +62,7 @@ section: home
             <div class="section-title">
                 <h1>Why A Workers’ Co-Op?</h1>
                 <span class="border"></span>
-                <p class="lead">Rust Belt Riders Composting believes in the value of workers across all sectors and our respect for work manifests itself in the belief that all employees ought to share in the success of the company. For us, this takes shape in the form ofworker-ownership. All employees are co-owners, making decisions with one another to best meet the needs of our employees, the community, and the planet.</p>
+                <p class="lead">{{site.data.sections.whycoop.text}}</p>
             </div>
             {% include components/faq.html site='site' type='coop' display='accordion' %}
         </div>
@@ -71,7 +70,7 @@ section: home
     </section>
     <!--/Section -->
     <!-- Parallax Section -->
-    <div id="contact" class="parallax" style="background-image: url(http://rustbeltriderscomposting.com/wp-content/uploads/2014/05/Rust-Belt-Riders_Header_Final2.jpg); background-position: 50% 359px;">
+    <div id="contact" class="parallax" style="background-image: url('images/header.jpg'); background-position: 50% 359px;">
         <div class="no-overlay">
             <div class="container ">
               {% include contact.html %}

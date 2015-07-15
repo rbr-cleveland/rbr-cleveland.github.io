@@ -204,9 +204,9 @@
       .state('enrollmentFinished', {
         url: "/finished",
         templateUrl: "/partials/enrollment-finished.html",
-        controller: function($scope, account) {
+        controller: function($scope, account, messageStrings) {
           $scope.account = account.get();
-
+          $scope.messageStrings = messageStrings;
         }
       });
   }]).run(function($rootScope, $http, serverUrl){
