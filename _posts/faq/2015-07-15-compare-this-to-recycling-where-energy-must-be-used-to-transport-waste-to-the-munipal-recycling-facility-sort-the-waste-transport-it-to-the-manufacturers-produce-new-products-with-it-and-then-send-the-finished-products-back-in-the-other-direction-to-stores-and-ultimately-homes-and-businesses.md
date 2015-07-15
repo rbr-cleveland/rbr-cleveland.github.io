@@ -2,7 +2,7 @@
 layout: faq
 category: faq
 published: true
-title: COMPOSING TURNS YOUR WASTE INTO A USEFUL PRODUCT
+title: Composting turns your waste into a useful product
 faqtype: compost
 ---
 
