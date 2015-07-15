@@ -7,4 +7,5 @@ faqtype: general
 ---
 
 
-Every subscriber will receive an aerated five-gallon bucket along with instructions on what can and can’t be composted. Additionally, we will provide you with a list of the community gardens your compost will be going to, along with ways to get involved with them should you be interested.
+
+Every member will initially recieve a waste audit to determine the frequency of service that will be needed. After one week, or a full container, we will establish a MOU to move forward. All waste collected will be brought to nearby community gardens for their use; to help grow and advance local agriculture in Cleveland!
