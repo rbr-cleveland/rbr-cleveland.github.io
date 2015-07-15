@@ -7,4 +7,5 @@ faqtype: general
 ---
 
 
-Using custom built trailers we will pick up your five-gallon bucket on bikes at an agreed upon location on your property (front porch, back door, driveway, lobby, etc) and empty your bucket into our trailer. Your bucket will be returned to the agreed upon location empty and ready to be filled up with more food scraps!
+
+Rust Belt Riders primary service delivery is through a combination of a van and the use of bicycles. Using custom built trailers we can pick up your totes on bikes at an agreed upon location on your property (front porch, back door, driveway, lobby, etc) and empty your tote into our trailer or van. All members will recieve containers comenserate with the volume of compostable materials being produced on a weekly basis. 
