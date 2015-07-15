@@ -3,7 +3,7 @@ layout: faq
 category: faq
 published: true
 title: "3. Members' Ecomonic Participation"
-faqtype: general
+faqtype: coop
 ---
 
 
