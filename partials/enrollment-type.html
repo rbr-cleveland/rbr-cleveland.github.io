@@ -3,12 +3,10 @@
 <div class="form-content">
   <div class="form-group">
     <span class="lead">
-      {{messageStrings.typeSelectionPre}}
-        <select data-ng-model="account.type">
-          <option value="residential">Household</option>
-          <option value="commercial">Business</option>
+      <span data-bind-html-compile="messageStrings.typeSelectionPre"></span>
+        <select data-ng-model="account.type" data-ng-options="option.value as option.type for option in typeOpts">
         </select>
-        {{messageStrings.typeSelectionPost}}
+        <span data-bind-html-compile="messageStrings.typeSelectionPost"></span>
     </span>
     </div>
   </div>

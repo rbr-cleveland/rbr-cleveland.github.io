@@ -18,16 +18,13 @@
       .setNotify(true, true)
   });
 
-  rbrEnrollment.value('enrollmentEnabled', {
-    residential: {{site.data.enrollment.residentialEnabled}},
-    commercial: {{site.data.enrollment.commercialEnabled}}
-  });
-
   rbrEnrollment.value('messageStrings', {
     {% for message in site.data.enrollment.messages %}
       {{message.key}} : "{{message.text}}",
     {% endfor %}
   });
+
+  rbrEnrollment.value('subscriberTypes', {{site.data.enrollment.options | jsonify}})
 
   rbrEnrollment.factory('account', function(localStorageService) {
 
@@ -75,15 +72,20 @@
       .state('enrollmentType', {
         url: "/",
         templateUrl: "/partials/enrollment-type.html",
-        controller: function($scope, account, enrollmentEnabled, $state, messageStrings) {
+        controller: function($scope, account, $state, messageStrings, subscriberTypes, subscriberType) {
           $scope.account = account.get();
-
+          $scope.typeOpts = [];
+          angular.forEach(subscriberTypes, function(type, key){
+            this.push({value: key, type: type.label})
+          }, $scope.typeOpts)
+          console.log($scope.typeOpts);
+          
           $scope.messageStrings = messageStrings;
 
           $scope.typeSubmit = function(isValid) {
             if (isValid){
               account.set($scope.account);
-              enrollmentEnabled[$scope.account.type] ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', { reason: "enrollment-disabled" });
+              subscriberType.isEnabled($scope.account.type) ? $state.go('enrollmentAddress') : $state.go('enrollmentNotify', { reason: "enrollment-disabled" });
             }
           }
         }
@@ -91,10 +93,11 @@
       .state('enrollmentAddress', {
         url: "/address",
         templateUrl: "/partials/enrollment-address.html",
-        controller: function($scope, account, rbrServiceArea, $state, messageStrings, enrollmentEnabled) {
+        controller: function($scope, account, rbrServiceArea, $state, messageStrings, subscriberType) {
           $scope.account = account.get();
+          $scope.messageStrings = messageStrings;
           $scope.$broadcast('show-errors-check-validity');
-          if(!enrollmentEnabled[$scope.account.type]) {
+          if(!subscriberType.isEnabled($scope.account.type)) {
             $state.go('enrollmentNotify')
           }
           $scope.account.address = $scope.account.address || {
@@ -104,8 +107,6 @@
             state: "OH",
             zip: ""
           };
-          $scope.addressHeader = $scope.account.type == 'residential' ? messageStrings.addressHeaderResidential : messageStrings.addressHeaderCommercial;
-
           $scope.subscriberInServiceArea = false;
 
           $scope.isInServiceArea = function isInServiceArea(isValid) {
@@ -156,27 +157,13 @@
       .state('enrollmentNotify', {
         url: "/notify/:reason",
         templateUrl: "/partials/enrollment-notify.html",
-        controller: function($scope, account, messageStrings, enrollmentEnabled, $stateParams, rbrCustomerData, $state) {
+        controller: function($scope, account, messageStrings, $stateParams, rbrCustomerData, $state) {
           $scope.account = account.get();
           $scope.$broadcast('show-errors-check-validity');
-          $scope.messages = [messageStrings.thankYou];
           $scope.isWaiting = false;
-          console.log($stateParams);
+          $scope.reason = $stateParams.reason;
+          $scope.messageStrings = messageStrings;
 
-          switch ($stateParams.reason) {
-
-            case "enrollment-disabled":
-              $scope.messages.push(messageStrings.noNewResidentialCustomers);
-              break;
-
-            case "not-in-service-area":
-              if ($scope.account.type == 'commercial') {
-                $scope.messages.push(messageStrings.notInOurServiceRegionCommericial);
-              } else {
-                $scope.messages.push(messageStrings.notInOurServiceRegionResidential);
-              }
-              break;
-          }
           $scope.signUpForUpdates = function(){
             $scope.isWaiting = true;
             var submit = rbrCustomerData.submit($scope.account);
@@ -193,9 +180,6 @@
               console.log(reason);
             }
           }
-
-          $scope.messages.push(messageStrings.signUpBelow);
-
           // This screen means that the user is not eligible to become a subcriber
           // So we have to figure out why and send them the message.
 
@@ -342,6 +326,28 @@
     }
 
   }]);
+
+  rbrEnrollment.service('subscriberType', ["subscriberTypes", function (subscriberTypes) {
+    return {
+      isEnabled: function isEnabled(type){
+        return subscriberTypes[type].enabled;
+      }
+    }
+  }])
+
+   rbrEnrollment.directive('bindHtmlCompile', ['$compile', function ($compile) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                scope.$watch(function () {
+                    return scope.$eval(attrs.bindHtmlCompile);
+                }, function (value) {
+                    element.html(value);
+                    $compile(element.contents())(scope);
+                });
+            }
+        };
+    }]);
 
   return rbrEnrollment;
 

@@ -1,6 +1,24 @@
 # What it looks like. Use this to allow service for either type when you are ready
 residentialEnabled: false
-commercialEnabled: true
+nonresidentialEnabled: true
+
+# options for the dropdown that drive language throughout the application.
+options:
+  residential:
+    label: Household
+    enabled: false
+
+  nonprofit:
+    label: Non-Profit
+    enabled: true
+
+  school:
+    label: School
+    enabled: true
+
+  commercial:
+    label: Business
+    enabled: true
 
 # Tips:
 #
@@ -12,34 +30,25 @@ commercialEnabled: true
 # Also Critical: Keep indentation consistent with what is already here.
 messages:
   - key: typeSelectionPre
-    text: "I am a"
+    text: "We are a"
 
   - key: typeSelectionPost
-    text: "looking to reduce my environmental impact"
+    text: "looking to reduce our environmental impact"
 
-  - key: typeSelectionResidentialOpt
-    text: "Household"
-
-  - key: typeSelectionCommercialOpt
-    text: "Business"
-
-  - key: addressHeaderResidential
-    text: "I Live at:"
-
-  - key: addressHeaderCommercial
-    text: "My business is at:"
+  - key: addressHeader
+    text: "Our {{account.type}} is located at:"
 
   - key: thankYou
     text: "Thank you for your interest in our services!"
 
-  - key: noNewResidentialCustomers
-    text: "Unfortuantely, due to high demand we are no longer accepting new residential customers."
+  - key: noNewCustomers
+    text: "Unfortuantely, due to high demand we are no longer accepting new {{account.type}} members."
 
-  - key: notInOurServiceRegionCommericial
-    text: "Unfortunately, your business is not in our service area."
+  - key: notInOurServiceRegion
+    text: "Unfortunately, your {{account.type}} is not currently in our service area."
 
-  - key: notInOurServiceRegionResidential
-    text: "Unfortunately, your home is not currently in our service area."
+  - key: notifyLearnMore
+    text: Learn More about our Services
 
   - key: successHeader
     text: "Success! You are eligible"
@@ -52,3 +61,9 @@ messages:
 
   - key: signUpBelow
     text: "Please sign up below and we will notify you once we can provide our service to you!"
+
+  - key: thanksNotifyMessage
+    text: "Thanks, {{account.firstname}}! We are looking forward to working with you"
+
+  - key: thanksSignupMessage
+    text: "Thanks, {{account.firstname}}! We are looking forward to working with you. You'll hear back from us within 48 hours."

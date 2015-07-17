@@ -1,13 +1,13 @@
 <div class="anim-zoom-out-full">
-  <h3>{{messageStrings.successHeader}}</h3>
-  <p>{{messageStrings.successInfo}}</p>
+  <h3 data-bind-html-compile="messageStrings.successHeader"></h3>
+  <p class="lead" data-bind-html-compile="messageStrings.successInfo"></p>
   <form id="enrollmentForm" name="enrollmentForm" data-ng-submit="submitAccount(enrollmentForm.$valid)" class="form-vertical">
   <div class="form-content">
-    <legend>{{messageStrings.successNextStepHeader}}</legend>
+    <legend data-bind-html-compile="messageStrings.successNextStepHeader"></legend>
     <fieldset>
-      <div data-ng-show="account.type == 'commercial'" class="form-group">
-        <label for="company">Company Name</label>
-        <input type="text" name="company" class="form-control" data-ng-model="account.company" data-ng-required="account.type == 'commercial'" />
+      <div data-ng-show="account.type !== 'residential'" class="form-group">
+        <label for="organization">Organization Name</label>
+        <input type="text" name="organization" class="form-control" data-ng-model="account.organization" data-ng-required="account.type !== 'residential'" />
       </div>
       <div class="row">
         <div class="col-md-6">
@@ -45,7 +45,7 @@
     </div>
     <div class="form-group well well-sm text-right">
       <button class="btn btn-primary btn-lg" data-ng-disabled="!enrollmentForm.$valid" type="submit">
-      <span class="fa fa-envelope"></span> Get Updates <span data-ng-show="isWaiting" class="fa fa-spinner fa-spin"></span></button>
+      <span class="fa fa-check-circle-o"></span> Sign Up <span data-ng-show="isWaiting" class="fa fa-spinner fa-spin"></span></button>
 
     </div>
   </form>

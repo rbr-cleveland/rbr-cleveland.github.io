@@ -1,5 +1,6 @@
 <div class="anim-slide-left">
-  <div class="form-content">
-    <h2>{{messageStrings.thanksMessage}}</h2>
+  <div class="form-content text-center">
+    <p class="lead" ng-show="account.eligible" bind-html-compile="messageStrings.thanksSignupMessage"></p>
+    <p class="lead" ng-show="!account.eligible" bind-html-compile="messageStrings.thanksNotifyMessage"></p>
   </div>
 </div>
