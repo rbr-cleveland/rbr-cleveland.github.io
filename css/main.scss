@@ -65,7 +65,8 @@ $brand-primary: darken($grey-color-dark, 6.5%) !default; // #337ab7
 .navbar-brand {
   padding:5px;
   img {
-    height:30px;
+    height: 100%;
+    margin-top: 5px;
   }
 }
 .navbar-default {

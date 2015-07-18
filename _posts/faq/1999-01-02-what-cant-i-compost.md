@@ -6,6 +6,4 @@ faqtype: general
 published: true
 ---
 
-
-
-Meat, fish,bread, and eggshells and bones. Dairy products, fat oil and grease, feces, weeds, diseased plants, chemically treated wood, ash or sawdust. Think of your compost as having a vegan diet and you will be A-Okay!
+Meat, fish, bread, and eggshells and bones. Dairy products, fat oil and grease, feces, weeds, diseased plants, chemically treated wood, ash or sawdust. Think of your compost as having a vegan diet and you will be A-Okay!
