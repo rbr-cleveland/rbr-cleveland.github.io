@@ -1,0 +1,35 @@
+---
+layout: default
+title: About us!
+section: home
+---
+<div class="home">
+<section id="services" class="content">
+    <!-- Container -->
+    <div class="container ">
+        <!-- Section Title -->
+        <div class="section-title">
+            <h1>{{site.data.sections.whycompost.heading}}</h1>
+            <span class="border"></span>
+            <p class="lead">{{site.data.sections.whycompost.text}}</p>
+        </div>
+        {% include components/faq.html site='site' type='compost' display='grid' %}
+    </div>
+    <!-- Container -->
+</section>
+<!--/Section -->
+<!--/Section -->
+<section id="why-a-workers-co-op" class="content" style="background-color:#FFF;">
+    <!-- Container -->
+    <div class="container ">
+        <!-- Section Title -->
+        <div class="section-title">
+            <h1>{{site.data.sections.whycoop.heading}}</h1>
+            <span class="border"></span>
+            <p class="lead">{{site.data.sections.whycoop.text}}</p>
+        </div>
+        {% include components/faq.html site='site' type='coop' display='accordion' %}
+    </div>
+    <!-- Container -->
+</section>
+</div>

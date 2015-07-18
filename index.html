@@ -16,7 +16,10 @@ section: home
                 <span class="border"></span>
                 <p class="lead">{{site.data.sections.about.text}}</p>
             </div>
-            <!-- Button trigger modal -->
+            <div class="text-center">
+            <a class="btn btn-lg btn-primary" href="/about">Learn More <span class="fa fa-long-arrow-right"></span></a>
+            <a class="btn btn-lg btn-success" href="/sign-up">Sign Up Now <span class="fa fa-long-arrow-right"></span></a>
+            </div>
 
             <!--/Section Title -->
         </div>
@@ -24,7 +27,7 @@ section: home
     </section>
     <!--/Section -->
     <!--/Section -->
-    <section id="we-love-technology" class="content" style="background-color:#FFF;">
+    <section id="we-love-technology" class="content" >
         <!-- Container -->
         <div class="container ">
             <!-- Section Title -->
@@ -40,39 +43,14 @@ section: home
     </section>
     <!--/Section -->
     <!--/Section -->
-    <section id="services" class="content">
-        <!-- Container -->
-        <div class="container ">
-            <!-- Section Title -->
-            <div class="section-title">
-                <h1>{{site.data.sections.whycompost.heading}}</h1>
-                <span class="border"></span>
-                <p class="lead">{{site.data.sections.whycompost.text}}</p>
-            </div>
-            {% include components/faq.html site='site' type='compost' display='grid' %}
-        </div>
-        <!-- Container -->
-    </section>
-    <!--/Section -->
-    <!--/Section -->
-    <section id="why-a-workers-co-op" class="content" style="background-color:#FFF;">
-        <!-- Container -->
-        <div class="container ">
-            <!-- Section Title -->
-            <div class="section-title">
-                <h1>{{site.data.sections.whycoop.heading}}</h1>
-                <span class="border"></span>
-                <p class="lead">{{site.data.sections.whycoop.text}}</p>
-            </div>
-            {% include components/faq.html site='site' type='coop' display='accordion' %}
-        </div>
-        <!-- Container -->
-    </section>
-    <!--/Section -->
     <!-- Parallax Section -->
     <div id="contact" class="parallax" style="background-image: url('images/header.jpg'); background-position: 50% 359px;">
         <div class="no-overlay">
-            <div class="container ">
+            <div class="container" style="background-color:#fff">
+              <div class="section-title">
+                  <h1>{{site.data.sections.contact.heading}}</h1>
+                  <span class="border"></span>
+              </div>
               {% include contact.html %}
             </div>
         </div>
