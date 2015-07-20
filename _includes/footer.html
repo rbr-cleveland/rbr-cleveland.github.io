@@ -6,30 +6,16 @@
             </div>
         </a>
         <ul class="socials-icons list-unstyled list-inline">
+          {% for social in site.data.config.social %}
             <li>
-                <a href="https://www.facebook.com/RustBeltRidersComposting">
+                <a href="{{social[1]}}">
                     <span class="fa-stack fa-3x">
                       <i class="fa fa-circle-thin fa-stack-2x"></i>
-                      <i class="fa fa fa-facebook fa-stack-1x"></i>
+                      <i class="fa fa fa-{{social[0]}} fa-stack-1x"></i>
                     </span>
                 </a>
             </li>
-            <li>
-                <a href="https://twitter.com/RustBeltRiders">
-                    <span class="fa-stack fa-3x">
-                      <i class="fa fa-circle-thin fa-stack-2x"></i>
-                      <i class="fa fa fa-twitter fa-stack-1x"></i>
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="http://instagram.com/rustbeltriders">
-                <span class="fa-stack fa-3x">
-                      <i class="fa fa-circle-thin fa-stack-2x"></i>
-                      <i class="fa fa fa-instagram fa-stack-1x"></i>
-                    </span>
-                </a>
-            </li>
+            {% endfor %}
         </ul>
         <p class="copyright">© Rust Belt Riders Composting, LLC 2014</p>
     </div>

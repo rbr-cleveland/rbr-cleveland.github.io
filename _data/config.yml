@@ -1,0 +1,14 @@
+phone: 440.781.1054
+contactemail: rustbeltriders@gmail.com
+address: 3635 Perkins Ave. Unit 3 NW, Cleveland, Ohio 44103
+# Add social icons by specifying a key that matches with a fontawesome.io icon:
+# http://fontawesome.io/icons/#brand
+# and then the full URL to the profile
+# i.e.:
+# linkedin: http://linkedin.com/company/RustBeltRiders
+social:
+  twitter: https://twitter.com/RustBeltRiders
+  facebook: https://www.facebook.com/RustBeltRidersComposting
+  instagram: http://instagram.com/rustbeltriders
+contact:
+  success: Thanks for reaching out! We will get back to you shortly.

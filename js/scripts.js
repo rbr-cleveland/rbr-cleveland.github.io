@@ -34,28 +34,67 @@ jQuery(document).ready(function(){
 			$(e.target.previousElementSibling).find('span.fa').removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
 	});
 
+	if ($('#contact-form').length > 0) {
+    $('#contact-form').parsley();
+	}
 
-	//Sticky Navigation
-	//
-	// // jQuery("#navigation").sticky({topSpacing:1});
-	//
-	// //Leaving Page Fade Out
-  //   jQuery('a.external').click(function(){
-	//
-  //       if( jQuery('.mask').length > 0 ){
-	//
-  //           var url = jQuery(this).attr('href');
-	//
-	// 		jQuery('.mask').fadeIn(250, function(){
-	// 			document.location.href = url;
-	// 		});
-	//
-	// 		jQuery("#loader").fadeIn("slow");
-	//
-  //           return false;
-  //       }
-	//
- // 	});
+    $('#contact-form').submit(function(e) {
+      e.preventDefault();
+			console.log(this);
+			if ($('#contact-form').length < 1) {
+				return;
+			}
+
+      if (!$(this).parsley('isValid')){
+        return;
+			}
+
+      $theForm = $(this);
+      $btn = $(this).find('#submit-button');
+      $btnText = $btn.text();
+      $(this).parent().append('<div class="alert"></div>');
+      $alert = $(this).parent().find('.alert');
+
+      $btn.find('.loading-icon').addClass('fa-spinner fa-spin ');
+      $btn.prop('disabled', true).find('span').text("Sending...");
+
+      $url = "http://formspree.io/rustbeltriders@gmail.com";
+
+      $attr = $(this).attr('action');
+      if (typeof $attr !== typeof undefined && $attr !== false) {
+        if ($(this).attr('action') != '') $url = $(this).attr('action');
+      }
+
+
+
+      var postAndMessage = function(){
+	      var formData = $($theForm).serialize();
+	      $.ajax({
+	          url: $url,
+	          method: "POST",
+	          dataType: "json",
+	          data: formData
+	        })
+	        .done(function(message) {
+
+	          if (message.success) {
+              var $message = $('#submit-button').attr('data-submit-success');
+	            $theForm.slideUp('medium', function() {
+	              $alert.removeClass('alert-danger');
+	              $alert.addClass('alert-success').html($message).slideDown('medium');
+	            });
+	          } else {
+	            $alert.addClass('alert-danger').html(message.error).slideDown('medium');
+	          }
+
+	          $btn.find('.loading-icon').removeClass('fa-spinner fa-spin ');
+	          $btn.prop('disabled', false).find('span').text($btnText);
+
+	        });
+	      }
+			postAndMessage();
+    });
+
 
 });
 

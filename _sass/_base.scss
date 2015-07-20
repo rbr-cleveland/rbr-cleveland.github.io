@@ -60,3 +60,14 @@ body.sign-up {
     background-color:#eee;
   }
 }
+
+ul.parsley-errors-list {
+  list-style: none;
+  li {
+    list-style:none;
+    text-align: left;
+    font-size:90%;
+    font-style:oblique;
+    color: #727272;
+  }
+}

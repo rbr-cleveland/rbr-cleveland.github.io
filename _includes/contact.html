@@ -1,35 +1,38 @@
-<div role="form" class="row" id="wpcf7-f6-o1" lang="en-US" dir="ltr">
+<div  role="form" class="row" lang="en-US" dir="ltr">
   <div class="col-md-6 col-md-offset-3">
-  <form name="" action="https://formspree.io/rustbeltriders@gmail.com" method="post" class="" novalidate="novalidate">
+  <form id="contact-form" name="" action="https://formspree.io/{{site.data.config.contactemail}}" method="post" class="">
     <div class="row">
         <div class="col-sm-12">
         <div class="form-group">
-            <input class="form-control" type="text" name="your-name" value="" size="40"  aria-required="true" aria-invalid="false" placeholder="Name" style="">
+            <input class="form-control" type="text" name="name"  size="40"  aria-required="true" aria-invalid="false" placeholder="Name" style="" required data-parsley-required-message="Name is required">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
         <div class="form-group">
-            <input class="form-control" type="email" name="your-email" value="" size="4" aria-required="true" aria-invalid="false" placeholder="Email">
+            <input class="form-control" type="email" name="_replyto" size="4" aria-required="true" required placeholder="Email">
         </div>
         </div>
         <div class="col-sm-6">
-            <input class="form-control" type="text" name="your-phone" value="" size="40" aria-required="true" aria-invalid="false" placeholder="Phone">
+            <input class="form-control" type="text" name="phone" size="40" aria-required="false"  placeholder="Phone">
         </div>
     </div>
       <div class="form-group">
-       <textarea name="your-message" cols="30" rows="10" class="form-control" aria-required="true" aria-invalid="false" placeholder="Message"></textarea></span>
+       <textarea name="_body" cols="30" rows="10" class="form-control" aria-required="true" required placeholder="Message"></textarea></span>
       </div>
-      <div class="form-group">
-        <input type="submit" value="Send Message" class=" btn btn-primary btn-large"><img class="ajax-loader" src="http://rustbeltriderscomposting.com/wp-content/plugins/contact-form-7/images/ajax-loader.gif" alt="Sending ..." style="visibility: hidden;"></p>
+      <div class="form-group text-right">
+        <input id="submit-button" type="submit" value="Send Message" class=" btn btn-primary btn-lg" data-submit-success="{{site.data.config.contact.success}}">
+        <span class="loading-icon"></span>
       </div>
     </div>
   </form>
   </div>
 <div class="contact-details">
-  <div class="text-center"><span class="fa fa-phone fa-4x"</div>
-  <div class="company-phone"><a>440.781.1054</a></div><i class="fa fa-envelope-o fa-inverse fa-2x"></i>
-  <h5 class="company-email">rustbeltriders@gmail.com</h5><i class="fa fa-map-marker fa-inverse fa-2x"></i>
-  <h5 class="company-address">3635 Perkins Ave. Unit 3 NW, Cleveland, Ohio 44103</h5></div>Please specify the twitter username.
-<p></p>
+  <p class="text-center"><a href="tel:{{site.data.config.phone}}"><span class="fa fa-phone fa-4x"></span></a></p>
+  <p class="lead"><a href="tel:{{site.data.config.phone}}">{{site.data.config.phone}}</a></p>
+  <p class="text-center"><a href="mailto:{{site.data.config.contactemail}}"><span class="fa fa-envelope-o fa-4x"></span></a></p>
+  <p class="lead"><a href="mailto:{{site.data.config.contactemail}}">{{site.data.config.contactemail}}</a></p>
+  <p class="text-center"><span class="fa fa-building-o fa-4x"></span></p>
+  <p class="lead">{{site.data.config.address}}</p>
+</div>
