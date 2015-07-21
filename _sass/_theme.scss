@@ -213,15 +213,6 @@ a:hover {
     z-index: 100000;
 }
 
-#loader {
-    background: url(images/newave-loading.gif) center center no-repeat;
-    height: 50px;
-    width: 50px;
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    margin: -25px 0 0 -25px;
-}
 /* Shortcodes */
 
 .title-divider {
@@ -936,35 +927,6 @@ footer ul.socials-icons li {
     margin: 10px;
 }
 
-#menu_top {
-    height: 50px;
-    width: 40px;
-    border-radius: 3px;
-    left: 50%;
-    margin-left: -20px;
-    margin-top: -65px;
-    position: absolute;
-    cursor: pointer;
-}
-
-#menu_top_inside {
-    background-image: url(http://rustbeltriderscomposting.com/wp-content/themes/newave-theme/images/menu_bottom_top_bg.png);
-    background-size: 18px 11px;
-    background-position: 0 0;
-    height: 22px;
-    left: 11px;
-    position: absolute;
-    top: 14px;
-    transition: background-position 0.3s linear 0s;
-    width: 18px;
-}
-
-#menu_top:hover #menu_top_inside {
-    -webkit-animation: bottom_top_over .3s linear infinite;
-    -moz-animation: bottom_top_over .3s linear infinite;
-    -o-animation: bottom_top_over .3s linear infinite;
-    animation: bottom_top_over .3s linear infinite;
-}
 
 @-webkit-keyframes bottom_top_over {
     0% {
