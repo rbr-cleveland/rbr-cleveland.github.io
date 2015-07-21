@@ -7,7 +7,7 @@
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.data.config.description }}{% endif %}">
   <meta property="og:title" content="{{ site.data.config.title }}" />
   <meta property="og:description" content="{{ site.data.config.description }}" />
-  <meta property="og:image" content="/images/full-logo.png" />
+  <meta property="og:image" content="{{site.url}}/images/full-logo.png" />
   <meta property="og:url" content="{{site.url}}" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
