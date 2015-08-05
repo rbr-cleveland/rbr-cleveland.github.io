@@ -16,7 +16,7 @@ options:
     label: School
     enabled: true
 
-  commercial:
+  business:
     label: Business
     enabled: true
 

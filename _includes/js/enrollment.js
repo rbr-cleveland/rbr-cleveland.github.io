@@ -79,7 +79,7 @@
             this.push({value: key, type: type.label})
           }, $scope.typeOpts)
           console.log($scope.typeOpts);
-          
+
           $scope.messageStrings = messageStrings;
 
           $scope.typeSubmit = function(isValid) {

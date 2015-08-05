@@ -4,6 +4,7 @@ url: "https://rustbeltriderscomposting.com" # the base hostname & protocol for y
 serverurl: https://rbr-backend.herokuapp.com
 # Build settings
 markdown: kramdown
+host: 127.0.0.1
 prose:
   media: images
   ignore:
