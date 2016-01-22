@@ -2,8 +2,9 @@
 layout: faq
 category: faq
 published: true
-title: Composting turns your waste into a useful product
+title: "Wasted Food: Where does it all go?"
 faqtype: compost
 ---
 
-Compare this to recycling, where energy must be used to transport waste to the munipal recycling facility, sort the waste, transport it to the manufacturers, produce new products with it, and then send the finished products back in the other directionâ€”to stores and, ultimately, homes and businesses.
+
+Food should be used to feed people, not land fills. When you initiate services with Rust Belt Riders you are ensuring that your wasted food has another life. Food waste can be used in a variety of ways; feeding hungry people, feeding animals that feed us, compost, and energy production. We specialize in compost but if your company is interested in any specific diversion strategy our network can support your need. We work with food shelters, farmers, and anerobic digestion companies to ensure your wasted food is being used just how you'd like!
