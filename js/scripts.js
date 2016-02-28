@@ -127,10 +127,12 @@ jQuery(function() {
 // 			  deeplinking: false
 // 	});
 // });
-//Parallax
+
+// Parallax
 jQuery(window).bind('load', function () {
 	parallaxInit();
 });
+
 function parallaxInit() {
     jQuery('.parallax').each(function(){
         jQuery(this).parallax("30%", 0.1);
