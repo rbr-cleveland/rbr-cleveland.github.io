@@ -449,7 +449,7 @@ section {
     height: 100%;
     width: 100%;
     background-image: url('/images/header.jpg');
-    background-position: center 0;
+    background-position: center center;
     background-size: cover;
     @media (max-width: $screen-sm-max) {
         height: 300px;
