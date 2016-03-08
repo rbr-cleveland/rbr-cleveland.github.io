@@ -1,33 +1,33 @@
-<div  role="form" class="row" lang="en-US" dir="ltr">
+<div role="form" class="row" lang="en-US" dir="ltr">
   <div class="col-md-6 col-md-offset-3">
-  <form id="contact-form" name="" action="https://formspree.io/{{site.data.config.contactemail}}" method="post" class="">
+  <form id="contact-form" name="" action="https://formspree.io/{{site.data.config.contactemail}}" method="post" class="form">
     <div class="row">
-        <div class="col-sm-12">
-        <div class="form-group">
-            <input class="form-control" type="text" name="name"  size="40"  aria-required="true" aria-invalid="false" placeholder="Name" style="" required data-parsley-required-message="Name is required">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-        <div class="form-group">
-            <input class="form-control" type="email" name="_replyto" size="4" aria-required="true" required placeholder="Email" data-parsley-required-message="Email is required">
-        </div>
-        </div>
-        <div class="col-sm-6">
-            <input class="form-control" type="text" name="phone" size="40" aria-required="false"  placeholder="Phone" data-parsley-required-message="Phone is required">
-        </div>
-    </div>
-      <div class="form-group">
-       <textarea name="_body" cols="30" rows="10" class="form-control" aria-required="true" required placeholder="Message" data-parsley-required-message="Message is required"></textarea></span>
+      <div class="col-sm-12">
+        <input class="form-control" type="text" name="name"  size="40"  aria-required="true" aria-invalid="false" placeholder="Name" style="" required data-parsley-required-message="Name is required">
       </div>
-      <div class="form-group text-right">
-        <input id="submit-button" type="submit" value="Send Message" class=" btn btn-primary btn-lg fa-input" data-submit-success="{{site.data.config.contact.success}} &f178;">
-        <span class="loading-icon"></span>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <input class="form-control" type="email" name="_replyto" size="4" aria-required="true" required placeholder="Email" data-parsley-required-message="Email is required">
+      </div>
+      <div class="col-sm-6">
+        <input class="form-control" type="text" name="phone" size="40" aria-required="false"  placeholder="Phone" data-parsley-required-message="Phone is required">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+         <textarea name="_body" cols="30" rows="10" class="form-control" aria-required="true" required placeholder="Message" data-parsley-required-message="Message is required"></textarea></span>
+        </div>
+        <div class="form-group text-right">
+          <input id="submit-button" type="submit" value="Send Message" class=" btn btn-primary btn-lg fa-input" data-submit-success="{{site.data.config.contact.success}} &f178;">
+          <span class="loading-icon"></span>
+        </div>
       </div>
     </div>
   </form>
   </div>
+</div>
 <div class="contact-details">
   <p class="text-center"><a href="tel:{{site.data.config.phone}}"><span class="fa fa-phone fa-4x"></span></a></p>
   <p class="lead"><a href="tel:{{site.data.config.phone}}">{{site.data.config.phone}}</a></p>
