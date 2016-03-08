@@ -3,13 +3,13 @@ layout: default
 section: home
 ---
 {% include home.html %}
-<div class="home">
+<div class="home"  >
 
 <!--/Navigation -->
     <!--/Section -->
-    <section id="we-are-newave" class="content">
+    <section id="we-are-newave" class="content" >
         <!-- Container -->
-        <div class="container ">
+        <div class="container" >
             <!-- Section Title -->
             <div class="section-title">
                 <h1>{{site.data.sections.about.heading}}</h1>
@@ -29,7 +29,7 @@ section: home
     <!--/Section -->
     <section id="we-love-technology" class="content" >
         <!-- Container -->
-        <div class="container ">
+        <div class="container">
             <!-- Section Title -->
             <div class="section-title">
                 <h1>{{site.data.sections.faq.heading}}</h1>
@@ -37,16 +37,16 @@ section: home
                 <p class="lead">{{site.data.sections.faq.text}}</p>
             </div>
             <!--/Section Title -->
-            {% include components/faq.html site='site' type='general' display='grid' %}
+            {% include components/faq.html site='site' faqtype='generalfaq' display='grid' %}
         </div>
         <!-- Container -->
     </section>
     <!--/Section -->
     <!--/Section -->
     <!-- Parallax Section -->
-    <div id="contact" class="parallax" style="background-image: url('images/header.jpg'); background-position: 50% 359px;">
+    <div id="contact" class="parallax">
         <div class="no-overlay">
-            <div class="container" style="background-color:#fff">
+            <div class="container">
               <div class="section-title">
                   <h1>{{site.data.sections.contact.heading}}</h1>
                   <span class="border"></span>

@@ -5,8 +5,8 @@
 .navbar .nav > li > a {
   text-transform:uppercase;
   font-weight:300;
-  font-size:14px;
-  color: #999999;
+  font-size:18px;
+  color: $dark-green;
   height: 100%;
   line-height: 35px;
   text-shadow: none;
@@ -15,7 +15,7 @@
 .navbar .nav  {
   & > li {
     &.active {
-      background-color: darken($light-green, 20%);
+      background-color: darken($white, 20%);
             & > a {
               background: none;
               box-shadow: none;

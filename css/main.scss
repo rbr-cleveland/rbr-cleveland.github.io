@@ -2,12 +2,12 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 @charset "utf-8";
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);
-
 
 // Our variables
+$white: #fff;
+$dark-green: #163820;
 $light-green: #dfefdc;
-$base-font-family: Lato, "Helvetica Neue", Helvetica, sans-serif;
+$base-font-family: "Apercu Regular", Calibri, Roboto, sans-serif;
 $alt-font-family: $base-font-family;
 $font-size-base:   16px !default;
 $grey-color: #828282;
@@ -20,7 +20,7 @@ $navbar-height:                    50px !default;
 $navbar-collapse-max-height:       340px !default;
 
 $navbar-default-color:             #999 !default;
-$navbar-default-bg:                $light-green !default;
+$navbar-default-bg:                $white !default;
 
 // Navbar links
 $navbar-default-link-color:                #777 !default;
@@ -31,9 +31,9 @@ $navbar-default-link-disabled-color:       #ccc !default;
 $navbar-default-link-disabled-bg:          transparent !default;
 
 // Navbar toggle
-$navbar-default-toggle-hover-bg:          darken($light-green, 10%) !default;
-$navbar-default-toggle-icon-bar-bg:        darken($light-green, 35%) !default;
-$navbar-default-toggle-border-color:       darken($light-green, 35%) !default;
+$navbar-default-toggle-hover-bg:          darken($white, 10%) !default;
+$navbar-default-toggle-icon-bar-bg:        darken($white, 35%) !default;
+$navbar-default-toggle-border-color:       darken($white, 35%) !default;
 
 // $small-font-size:  $base-font-size * 0.875;
 // $base-line-height: 1.5;
@@ -49,10 +49,10 @@ $navbar-default-toggle-border-color:       darken($light-green, 35%) !default;
 // $grey-color-dark:  darken($grey-color, 25%);
 
 // // Width of the content area
-// $content-width:    800px;
+$content-width:    800px;
 
-// $on-palm:          600px;
-// $on-laptop:        800px;
+$on-palm:          600px;
+$on-laptop:        800px;
 // $light-green: #dfefdc;
 
 // $brand-primary: darken($grey-color-dark, 6.5%) !default; // #337ab7
@@ -79,14 +79,6 @@ $navbar-default-toggle-border-color:       darken($light-green, 35%) !default;
         "theme"
 ;
 
-.navbar-brand {
-  padding:5px;
-  img {
-    height: 100%;
-    margin-top: 5px;
-  height: 80%;
-  }
-}
 
 // .modal-dialog {
 //   width: 100%;
@@ -102,6 +94,10 @@ $navbar-default-toggle-border-color:       darken($light-green, 35%) !default;
 
 html, body.sign-up {
   background:white;
+}
+
+.container {
+  margin: 200px;
 }
 
 @import 'navigation'

@@ -1,7 +1,7 @@
-{% assign faqs = site.categories.faq | where: "faqtype", include.type %}
+{% assign faqs = site.data[include.faqtype] %}
+{% unless faqs %} {% assign faqs = site.data.general %}{% endunless %}
 {% if include.display == 'grid' %}
-{% assign sortedfaqs = faqs | sort:"date"  %}
-  {% for faq in sortedfaqs %}
+  {% for faq in faqs %}
       {% assign loopindex = forloop.index | modulo: 2 %}
       {% if loopindex == 1 %}
         <ul class="technology row">

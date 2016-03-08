@@ -3,6 +3,7 @@ layout: default
 title: About us!
 section: home
 ---
+
 <div class="home">
 <section id="services" class="content">
     <!-- Container -->
@@ -13,7 +14,7 @@ section: home
             <span class="border"></span>
             <p class="lead">{{site.data.sections.whycompost.text}}</p>
         </div>
-        {% include components/faq.html site='site' type='compost' display='grid' %}
+        {% include components/faq.html site='site' faqtype='compostfaq' display='grid' %}
     </div>
     <!-- Container -->
 </section>
@@ -28,7 +29,7 @@ section: home
             <span class="border"></span>
             <p class="lead">{{site.data.sections.whycoop.text}}</p>
         </div>
-        {% include components/faq.html site='site' type='coop' display='accordion' %}
+        {% include components/faq.html site='site' faqtype='coopfaq' display='accordion' %}
     </div>
     <!-- Container -->
 </section>
