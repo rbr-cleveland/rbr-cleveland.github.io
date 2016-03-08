@@ -1,26 +1,28 @@
 {% assign faqs = site.data[include.faqtype] %}
 {% unless faqs %} {% assign faqs = site.data.general %}{% endunless %}
 {% if include.display == 'grid' %}
+  <div>
   {% for faq in faqs %}
       {% assign loopindex = forloop.index | modulo: 2 %}
       {% if loopindex == 1 %}
-        <ul class="technology row">
-          <div class="col-md-6 text-align-left" >
-            <li>
-               <h5>{{faq.title}}</h5>
-              <p>{{faq.content}}</p>
-            </li>
+      <div class="row">
+        <div class="technology col-md-6">
+          <div >
+            <h5>{{faq.title}}</h5>
+            <p>{{faq.content}}</p>
           </div>
-      {% else %}
-         <div class="col-md-6 text-align-left">
-            <li>
-               <h5>{{faq.title}}</h5>
-              <p>{{faq.content}}</p>
-            </li>
+        </div>
+        {% else %}
+        <div class="technology col-md-6">
+          <div>
+            <h5>{{faq.title}}</h5>
+            <p>{{faq.content}}</p>
           </div>
-        </ul>
+        </div>
+      </div>
       {% endif %}
   {% endfor %}
+</div>
 {% elsif include.display == 'accordion' %}
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   {% assign sortedfaqs = faqs | sort:"title"  %}

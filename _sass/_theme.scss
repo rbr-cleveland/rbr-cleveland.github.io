@@ -69,7 +69,7 @@ body {
     font-size: $font-size-base;
     height: 100%;
     color: #444;
-    background: url("../images/pattern.png") repeat scroll 0 0 transparent;
+    background-color: white;
     @media (max-width: $screen-sm-max) {
         font-size: ($font-size-base - 3);
     }
@@ -107,10 +107,11 @@ b {
 }
 
 .home {
-    background-image: url('/images/pattern.png');
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: white;
+    // background-image: url('/images/pattern.png');
+    // background-position: 0 0;
+    // background-repeat: no-repeat;
+    // background-attachment: fixed;
     .container {
       margin: 0 auto;
       padding: 100px 20px;
@@ -446,10 +447,13 @@ section {
 
 .home-section {
     height: 100%;
-    position: relative;
     width: 100%;
+    background-image: url('/images/header.jpg');
+    background-position: center 0;
+    background-size: cover;
     @media (max-width: $screen-sm-max) {
-        height:300px;
+        height: 300px;
+        // width: $screen-sm-max;
     }
 }
 
@@ -642,17 +646,9 @@ section {
 
 /* We love technology */
 
-ul.technology {
-    text-align: center;
-}
-
-ul.technology li {
-    display: inline-block;
+.technology{
     text-align: left;
-    font-family: $base-font-family;
     //background-image: url('http://rustbeltriderscomposting.com/wp-content/themes/newave-theme/images/Rust-Belt-Riders-Logo.png');
-    margin: 10px;
-    position: relative;
     /*overflow:hidden;
     transition:all 0.3s ease 0s;
     -moz-transition:all 0.3s ease 0s;
@@ -660,15 +656,7 @@ ul.technology li {
     -o-transition:all 0.3s ease 0s;*/
 }
 
-ul.technology li:first-child {
-    margin-left: 0px;
-}
-
-ul.technology li:last-child {
-    margin-right: 0px;
-}
-
-ul.technology li i {
+.technology i {
     font-size: 40px;
     transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -676,7 +664,7 @@ ul.technology li i {
     -o-transition: all 0.3s ease 0s;
 }
 
-ul.technology li h5 {
+.technology h5 {
     font-size: ($font-size-base + 2);
     font-family: $alt-font-family;
     color: #222222;
@@ -687,7 +675,7 @@ ul.technology li h5 {
     -o-transition: all 0.3s ease 0s;
 }
 
-ul.technology li p {
+.technology  p {
     margin-top: 10px;
     transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
