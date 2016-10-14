@@ -29,7 +29,7 @@
   rbrEnrollment.factory('account', function(localStorageService) {
 
     var defaultAccount = {
-      type: 'residential',
+      type: 'commercial',
       eligible: false,
       inServiceArea: false,
       status: false,
@@ -234,12 +234,12 @@
 
           if (res.status == 200) {
 
-            var point = [latLng['lat'], latLng['lng']];
+            var point = [latLng['lng'], latLng['lat']];
             var polygon = res.data.features[0].geometry.coordinates[0];
             var isInPolygon = pointInPolygon(point, polygon);
-
             resolve(isInPolygon);
           } else {
+            console.log(err)
             reject(err);
           }
         });
@@ -247,29 +247,34 @@
     };
 
     var geocode = function geocode(addressString) {
-      var geocoder = new google.maps.Geocoder();
-      var result = {};
-      return $q(function(resolve, reject) {
-        geocoder.geocode({
-          'address': addressString
-        }, function geocodeAddress(results, status) {
-
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (results) {
-              result['lat'] = results[0].geometry.location.F;
-              result['lng'] = results[0].geometry.location.A;
-              var found = true;
-              resolve(result);
+      try {
+        var geocoder = new google.maps.Geocoder();
+        var result = {};
+        return $q(function(resolve, reject) {
+          geocoder.geocode({
+            'address': addressString
+          }, function geocodeAddress(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (results) {
+                result['lat'] = results[0].geometry.location.lat();
+                result['lng'] = results[0].geometry.location.lng();
+                var found = true;
+                resolve(result);
+              } else {
+                console.log('Location not found');
+                reject(results);
+              }
             } else {
-              console.log('Location not found');
-              reject(results);
+              console.log('Geocoder failed due to: ' + status);
+              reject(status);
             }
-          } else {
-            console.log('Geocoder failed due to: ' + status);
-            reject(status);
-          }
+          });
         });
-      });
+      }
+      catch(err){
+        console.log(err)
+      }
+
     };
 
     var methods = {

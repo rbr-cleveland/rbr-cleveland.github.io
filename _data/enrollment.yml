@@ -4,9 +4,6 @@ nonresidentialEnabled: true
 
 # options for the dropdown that drive language throughout the application.
 options:
-  residential:
-    label: Household
-    enabled: false
 
   nonprofit:
     label: Non-Profit
