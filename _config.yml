@@ -1,9 +1,8 @@
 # Site settings
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://rustbeltriderscomposting.com" # the base hostname & protocol for your site
+url: "https://rustbeltriders.com" # the base hostname & protocol for your site
 serverurl: https://rbr-backend.herokuapp.com
 # Build settings
-markdown: kramdown
 host: 127.0.0.1
 prose:
   media: images
